@@ -1,0 +1,278 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ;******************** (C) COPYRIGHT HAW-Hamburg ********
+                       ************************
+    2 00000000         ;* File Name          : main.s
+    3 00000000         ;* Author             : Alfred Lohmann
+    4 00000000         ;* Author             : Tobias Jaehnichen 
+    5 00000000         ;* Version            : V2.0
+    6 00000000         ;* Date               : 23.04.2017
+    7 00000000         ;* Description        : This is a simple main.
+    8 00000000         ;       : The output is send to UART 1. Open Serial Wind
+                       ow when 
+    9 00000000         ;       : when debugging. Select UART #1 in Serial Windo
+                       w selection.
+   10 00000000         ;       :
+   11 00000000         ;       : Replace this main with yours.
+   12 00000000         ;
+   13 00000000         ;*******************************************************
+                       ************************
+   14 00000000         
+   15 00000000                 EXTERN           Init_TI_Board ; Initialize the 
+                                                            serial line
+   16 00000000                 EXTERN           ADC3_CH7_DMA_Config ; Initializ
+                                                            e the ADC
+   17 00000000         ;EXTERN initHW    ; Init Timer
+   18 00000000                 EXTERN           puts        ; C output function
+                                                            
+   19 00000000                 EXTERN           TFT_puts    ; TFT output functi
+                                                            on
+   20 00000000                 EXTERN           TFT_cls     ; TFT clear functio
+                                                            n
+   21 00000000                 EXTERN           TFT_gotoxy  ; TFT goto x y func
+                                                            tion  
+   22 00000000                 EXTERN           Delay       ; Delay (ms) functi
+                                                            on
+   23 00000000                 EXTERN           GPIO_G_SET  ; Set output-LEDs
+   24 00000000                 EXTERN           GPIO_G_CLR  ; Clear output-LEDs
+                                                            
+   25 00000000                 EXTERN           GPIO_G_PIN  ; Output-LEDs statu
+                                                            s
+   26 00000000                 EXTERN           GPIO_E_PIN  ; Button status
+   27 00000000                 EXTERN           ADC3_DR     ; ADC Value (ADC3_C
+                                                            H7_DMA_Config has t
+                                                            o be called before)
+                                                            
+   28 00000000         
+   29 00000000         ;********************************************
+   30 00000000         ; Data section, aligned on 4-byte boundery
+   31 00000000         ;********************************************
+   32 00000000         
+   33 00000000                 AREA             MyData, DATA, align = 2
+   34 00000000         
+   35 00000000                 GLOBAL           text
+   36 00000000         
+   37 00000000 48 61 6C 
+              6C 6F 20 
+              54 49 2D 
+              4C 61 62 
+              6F 72 21 
+              0A 0D 00 text    DCB              "Hallo TI-Labor!\n\r",0
+   38 00000012         
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   39 00000012         ;********************************************
+   40 00000012         ; Code section, aligned on 8-byte boundery
+   41 00000012         ;********************************************
+   42 00000012         
+   43 00000012                 AREA             |.text|, CODE, READONLY, ALIGN 
+= 3
+   44 00000000         
+   45 00000000         ;--------------------------------------------
+   46 00000000         ; main subroutine
+   47 00000000         ;--------------------------------------------
+   48 00000000                 EXPORT           main [CODE]
+   49 00000000         
+   50 00000000         main    PROC
+   51 00000000         
+   52 00000000 F7FF FFFE       BL               Init_TI_Board ; Initialize the 
+                                                            serial line to TTY
+   53 00000004         ; for compatability to out TI-C-Board
+   54 00000004         ;BL initHW   ; Timer init
+   55 00000004         
+   56 00000004 4803            LDR              r0,=text
+   57 00000006 F7FF FFFE       BL               puts        ; call C output met
+                                                            hod
+   58 0000000A         
+   59 0000000A 4802            LDR              r0,=text
+   60 0000000C F7FF FFFE       BL               TFT_puts    ; call TFT output m
+                                                            ethod
+   61 00000010         
+   62 00000010         
+   63 00000010 E7FE    forever b                forever     ; nowhere to retun 
+                                                            if main ends  
+   64 00000012                 ENDP
+   65 00000012         
+   66 00000012 00 00           ALIGN
+   67 00000014         
+   68 00000014                 END
+              00000000 
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
+ork --depend=.\objects\main.d -o.\objects\main.o -IC:\Keil_v5\ARM\RV31\INC -IC:
+\Keil_v5\ARM\CMSIS\Include -IC:\Keil_v5\ARM\Inc\ST\STM32F10x --predefine="__EVA
+L SETA 1" --predefine="__UVISION_VERSION SETA 523" --list=.\listings\main.lst m
+ain.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+MyData 00000000
+
+Symbol: MyData
+   Definitions
+      At line 33 in file main.s
+   Uses
+      None
+Comment: MyData unused
+text 00000000
+
+Symbol: text
+   Definitions
+      At line 37 in file main.s
+   Uses
+      At line 35 in file main.s
+      At line 56 in file main.s
+      At line 59 in file main.s
+
+2 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+.text 00000000
+
+Symbol: .text
+   Definitions
+      At line 43 in file main.s
+   Uses
+      None
+Comment: .text unused
+forever 00000010
+
+Symbol: forever
+   Definitions
+      At line 63 in file main.s
+   Uses
+      At line 63 in file main.s
+Comment: forever used once
+main 00000000
+
+Symbol: main
+   Definitions
+      At line 50 in file main.s
+   Uses
+      At line 48 in file main.s
+Comment: main used once
+3 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+External symbols
+
+ADC3_CH7_DMA_Config 00000000
+
+Symbol: ADC3_CH7_DMA_Config
+   Definitions
+      At line 16 in file main.s
+   Uses
+      None
+Comment: ADC3_CH7_DMA_Config unused
+ADC3_DR 00000000
+
+Symbol: ADC3_DR
+   Definitions
+      At line 27 in file main.s
+   Uses
+      None
+Comment: ADC3_DR unused
+Delay 00000000
+
+Symbol: Delay
+   Definitions
+      At line 22 in file main.s
+   Uses
+      None
+Comment: Delay unused
+GPIO_E_PIN 00000000
+
+Symbol: GPIO_E_PIN
+   Definitions
+      At line 26 in file main.s
+   Uses
+      None
+Comment: GPIO_E_PIN unused
+GPIO_G_CLR 00000000
+
+Symbol: GPIO_G_CLR
+   Definitions
+      At line 24 in file main.s
+   Uses
+      None
+Comment: GPIO_G_CLR unused
+GPIO_G_PIN 00000000
+
+Symbol: GPIO_G_PIN
+   Definitions
+      At line 25 in file main.s
+   Uses
+      None
+Comment: GPIO_G_PIN unused
+GPIO_G_SET 00000000
+
+Symbol: GPIO_G_SET
+   Definitions
+      At line 23 in file main.s
+   Uses
+      None
+Comment: GPIO_G_SET unused
+Init_TI_Board 00000000
+
+Symbol: Init_TI_Board
+
+
+
+ARM Macro Assembler    Page 2 Alphabetic symbol ordering
+External symbols
+
+   Definitions
+      At line 15 in file main.s
+   Uses
+      At line 52 in file main.s
+Comment: Init_TI_Board used once
+TFT_cls 00000000
+
+Symbol: TFT_cls
+   Definitions
+      At line 20 in file main.s
+   Uses
+      None
+Comment: TFT_cls unused
+TFT_gotoxy 00000000
+
+Symbol: TFT_gotoxy
+   Definitions
+      At line 21 in file main.s
+   Uses
+      None
+Comment: TFT_gotoxy unused
+TFT_puts 00000000
+
+Symbol: TFT_puts
+   Definitions
+      At line 19 in file main.s
+   Uses
+      At line 60 in file main.s
+Comment: TFT_puts used once
+puts 00000000
+
+Symbol: puts
+   Definitions
+      At line 18 in file main.s
+   Uses
+      At line 57 in file main.s
+Comment: puts used once
+12 symbols
+351 symbols in table

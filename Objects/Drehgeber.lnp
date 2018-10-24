@@ -1,0 +1,21 @@
+--cpu Cortex-M3
+".\objects\assert.o"
+".\objects\keypad.o"
+".\objects\tft.o"
+".\objects\timer.o"
+".\objects\ti_lib.o"
+".\objects\system_stm32f10x.o"
+".\objects\startup_stm32f10x_md.o"
+".\objects\serial.o"
+".\objects\retarget.o"
+".\objects\getline.o"
+".\objects\sim_board_io.o"
+".\objects\main.o"
+".\objects\gpio.o"
+".\objects\input.o"
+".\objects\output.o"
+".\objects\drehgeber.o"
+--strict --scatter ".\Objects\Drehgeber.sct"
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Listings\Drehgeber.map" -o .\Objects\Drehgeber.axf
