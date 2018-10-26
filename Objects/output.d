@@ -1,5 +1,6 @@
 .\objects\output.o: output.c
 .\objects\output.o: general.h
+.\objects\output.o: input.h
 .\objects\output.o: output.h
 .\objects\output.o: gpio.h
 .\objects\output.o: .\TI_BRD_LIB\Library\TI_memory_map.h

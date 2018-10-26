@@ -26,10 +26,9 @@
 #define PHASE_C		0x03	// A = 1, B = 1
 #define PHASE_D		0x01	// A = 0, B = 1
 
-#define INPUT_A		1
-#define INPUT_B		2
-#define INPUT_C		3
-#define INPUT_D		4
+#define FORWARD		1
+#define BACKWARD	2
+#define NO_CHANGE	3
 
 
 // Values for error handling
