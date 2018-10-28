@@ -3,6 +3,7 @@
 #include "input.h"
 #include "gpio.h"
 
+
 /**
   * @brief 		Liest Werte des Pins an Kanal A und B des Drehgebers aus und gibt den Zustand zurück
 	*/

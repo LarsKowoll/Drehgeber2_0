@@ -37,6 +37,7 @@
 #include "output.h"
 #include "drehgeber.h"
 
+
 /**
   * @brief  Main program
   * @param  None
@@ -51,12 +52,13 @@ int main(void) {
 		resetErrorLED(); // wenn Taste S6 gedrückt wird, geht LED D18 aus
 		
 		int zustand1, zustand2, drehung, e;
+		char hans;
 		e = readDrehgeber(&zustand1); // Zustand einlesen
 		zustand2 = PHASE_B; // zum Testen
 	  e = getDrehrichtung(&zustand1, &zustand2, &drehung);
-		
 		// Ausgabe zum Testen
 		TFT_cls();
+		TFT_putc(intToString(getAnzahlSchritte(), &hans));
 		TFT_puts("Zustand 1: ");
 		switch (zustand1) {
 			case PHASE_A: TFT_puts("Phase A"); break;
@@ -78,6 +80,7 @@ int main(void) {
 			case NO_CHANGE: TFT_puts("keine Drehung"); break;
 			default: TFT_puts("Fehler");
 		}
+		
   }
 }
 
