@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 	
-void zeitSchritt(void);
+int zeitSchritt(void);
 
 #ifdef	__cplusplus
 }

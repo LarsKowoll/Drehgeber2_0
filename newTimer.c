@@ -5,10 +5,11 @@
 
 int gespeicherteZeit = 0;
 
-void zeitSchritt(){
+int zeitSchritt(){
 	int aktuelleZeit = getTimeStamp();
 	int vergangeneZeit;
 	
 	int zeitDif = aktuelleZeit - vergangeneZeit;
 	vergangeneZeit = aktuelleZeit;
+	return vergangeneZeit;
 }

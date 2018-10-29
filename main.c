@@ -47,42 +47,40 @@ int main(void) {
 		// resetLED(LED_D18); // zum Testen
 		resetErrorLED(); // wenn Taste S6 gedrückt wird, geht LED D18 aus
 		
-		int zustand1, zustand2, drehung, e;
-		char hans;
-		e = readDrehgeber(&zustand1); // Zustand einlesen
-		zustand2 = PHASE_B; // zum Testen
+		int zustand1, zustand2, drehung, drehungTMP, e;
+		e = readDrehgeber(&zustand1); // Zustand 1 einlesen
+		e = readDrehgeber(&zustand2); // Zustand 2 einlesen
 	  e = getDrehrichtung(&zustand1, &zustand2, &drehung);
-		e = getDrehrichtung(&zustand1, &zustand2, &drehung);
 		
-		int as = getAnzahlSchritte();
-		intToBinary(20);
-		zaehlerstandToLED();
+		zaehlerstandToLED(getAnzahlSchritte());
+		zaehlerstandToTFT(getAnzahlSchritte());
 		
 		// Ausgabe zum Testen
 		TFT_cls();
-		TFT_putc(intToString(getAnzahlSchritte(), &hans));
-		TFT_puts("Zustand 1: ");
-		switch (zustand1) {
-			case PHASE_A: TFT_puts("Phase A"); break;
-			case PHASE_B: TFT_puts("Phase B"); break;
-			case PHASE_C: TFT_puts("Phase C"); break;
-			case PHASE_D: TFT_puts("Phase D"); break;
+//		TFT_puts("Zustand 1: ");
+//		switch (zustand1) {
+//			case PHASE_A: TFT_puts("Phase A"); break;
+//			case PHASE_B: TFT_puts("Phase B"); break;
+//			case PHASE_C: TFT_puts("Phase C"); break;
+//			case PHASE_D: TFT_puts("Phase D"); break;
+//		}
+//		TFT_puts("; Zustand 2: ");
+//		switch (zustand2) {
+//			case PHASE_A: TFT_puts("Phase A"); break;
+//			case PHASE_B: TFT_puts("Phase B"); break;
+//			case PHASE_C: TFT_puts("Phase C"); break;
+//			case PHASE_D: TFT_puts("Phase D"); break;
+//		}
+		if (drehung != drehungTMP){
+			TFT_puts("; Drehung: ");
+			switch (drehung) {
+				case FORWARD: TFT_puts("vorwaerts"); break;
+				case BACKWARD: TFT_puts("rueckwaerts"); break;
+				case NO_CHANGE: TFT_puts("keine Drehung"); break;
+				default: TFT_puts("Fehler");
+			}
 		}
-		TFT_puts("; Zustand 2: ");
-		switch (zustand2) {
-			case PHASE_A: TFT_puts("Phase A"); break;
-			case PHASE_B: TFT_puts("Phase B"); break;
-			case PHASE_C: TFT_puts("Phase C"); break;
-			case PHASE_D: TFT_puts("Phase D"); break;
-		}
-		TFT_puts("; Drehung: ");
-		switch (drehung) {
-			case FORWARD: TFT_puts("vorwaerts"); break;
-			case BACKWARD: TFT_puts("rueckwaerts"); break;
-			case NO_CHANGE: TFT_puts("keine Drehung"); break;
-			default: TFT_puts("Fehler");
-		}
-		
+		drehungTMP = drehung;
   }
 }
 

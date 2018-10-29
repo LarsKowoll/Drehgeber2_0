@@ -33,9 +33,10 @@ int readDrehgeber(int* zustand) {
 }
 
 int readGPIO(int number, int* value) {
-	// TODO: number auf Zulässigkeit prüfen (0 <= number <= 15)
+	if ((number < 0) || (number > 15)){
 	*value = readGPIOPin(BUTTON_PORT, number);
 	return EOK;
+	}
 }
 
 //EOF
