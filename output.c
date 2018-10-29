@@ -41,24 +41,15 @@ char* intToBinary(int zahl) {
 	//return EOK;
 }
 
-int zaehlerstandToLED(void) {
-	if (binary[0] == '0' + 1) {
-		setLED(LED_D28);
-	}
-	else {
-		resetLED(LED_D28);
-	}
-	
-	// andere Möglichkeit
-	int led = 15;
+int zaehlerstandToLED(void) {	
+	int led = 8;
 	for (int i = 0; i < 8; i++) {
 		if (binary[i] == '0' + 1) {
-			setLED(led);
+			setLED(led + i);
 		}
 		else {
-			resetLED(led);
+			resetLED(led + i);
 		}
-		led--;
 	}
 	
 }
