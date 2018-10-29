@@ -41,7 +41,8 @@ char* intToBinary(int zahl) {
 	//return EOK;
 }
 
-int zaehlerstandToLED(void) {	
+int zaehlerstandToLED(int zaehlerstand) {	
+	intToBinary(zaehlerstand);
 	int led = 8;
 	for (int i = 0; i < 8; i++) {
 		if (binary[i] == '0' + 1) {
