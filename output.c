@@ -7,6 +7,8 @@
 
 #define maxIntegerLaenge 20
 
+char binary[8];
+
 void setLED(int led) {
 	setGPIOPin(LED_PORT, led);
 }
@@ -28,7 +30,38 @@ int resetErrorLED(void) {
 	return e;
 }
 
+char* intToBinary(int zahl) {
+	int rest;
+	for (int i = 0; i < 8; i++) {
+		rest = zahl % 2;
+		binary[i] = '0' + rest;
+		zahl = zahl / 2;
+	}
+	return binary;
+	//return EOK;
+}
 
+int zaehlerstandToLED(void) {
+	if (binary[0] == '0' + 1) {
+		setLED(LED_D28);
+	}
+	else {
+		resetLED(LED_D28);
+	}
+	
+	// andere Möglichkeit
+	int led = 15;
+	for (int i = 0; i < 8; i++) {
+		if (binary[i] == '0' + 1) {
+			setLED(led);
+		}
+		else {
+			resetLED(led);
+		}
+		led--;
+	}
+	
+}
 
 int intToString(int zahl,char* zahlAlsString){
 	char tmpString[maxIntegerLaenge];
@@ -39,7 +72,7 @@ int intToString(int zahl,char* zahlAlsString){
 		restZahl = (int) (restZahl / 10); //letzte Ziffer wird gelöscht
 	}
 	zahlAlsString = tmpString;
-	return 1;
+	return EOK;
 }
 	
 

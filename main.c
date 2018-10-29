@@ -1,13 +1,9 @@
 /**
   ******************************************************************************
   * @file    	main.c 
-  * @author  	Alfred Lohmann
-  *        	  HAW-Hamburg
-  *          	Labor für technische Informatik
-  *          	Berliner Tor  7
-  *          	D-20099 Hamburg
+  * @author  	
   * @version V1.0
-  * @date    23.05.2013
+  * @date    
   * @brief   Main program body
   ******************************************************************************
   */
@@ -56,6 +52,12 @@ int main(void) {
 		e = readDrehgeber(&zustand1); // Zustand einlesen
 		zustand2 = PHASE_B; // zum Testen
 	  e = getDrehrichtung(&zustand1, &zustand2, &drehung);
+		e = getDrehrichtung(&zustand1, &zustand2, &drehung);
+		
+		int as = getAnzahlSchritte();
+		intToBinary(20);
+		zaehlerstandToLED();
+		
 		// Ausgabe zum Testen
 		TFT_cls();
 		TFT_putc(intToString(getAnzahlSchritte(), &hans));
