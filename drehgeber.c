@@ -14,7 +14,7 @@ int getDrehrichtung(int* zustand1, int* zustand2, int* drehung) {
 					              break;
 					case PHASE_C: return PHASE_ERROR;
 					case PHASE_D: *drehung = BACKWARD;
-												anzahlSchritte++;
+												anzahlSchritte--;
 					              break;
 					default: return PHASE_ERROR; // ungültige Eingabe für Zustand 2
 				}
@@ -23,7 +23,7 @@ int getDrehrichtung(int* zustand1, int* zustand2, int* drehung) {
 		case PHASE_B:
 				switch (*zustand2) {
 					case PHASE_A: *drehung = BACKWARD;
-												anzahlSchritte++;
+												anzahlSchritte--;
 					              break;
 					case PHASE_B: *drehung = NO_CHANGE;
 					              break;
@@ -39,7 +39,7 @@ int getDrehrichtung(int* zustand1, int* zustand2, int* drehung) {
 				switch (*zustand2) {
 					case PHASE_A: return PHASE_ERROR;
 					case PHASE_B: *drehung = BACKWARD;
-												anzahlSchritte++;
+												anzahlSchritte--;
 					              break;
 					case PHASE_C: *drehung = NO_CHANGE;
 					              break;
@@ -57,7 +57,7 @@ int getDrehrichtung(int* zustand1, int* zustand2, int* drehung) {
 					              break;
 					case PHASE_B: return PHASE_ERROR;
 					case PHASE_C: *drehung = BACKWARD;
-												anzahlSchritte++;
+												anzahlSchritte--;
 					              break;
 					case PHASE_D: *drehung = NO_CHANGE;
 					              break;
@@ -73,4 +73,9 @@ int getDrehrichtung(int* zustand1, int* zustand2, int* drehung) {
 int getAnzahlSchritte(){
 	return anzahlSchritte;
 	}
+
+void setAnzahlSchritte(int zahl){
+	anzahlSchritte = zahl;
+}
+		
 //EOF

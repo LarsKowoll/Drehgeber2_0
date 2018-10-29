@@ -34,6 +34,7 @@
 #include "drehgeber.h"
 
 
+
 /**
   * @brief  Main program
   * @param  None
@@ -41,46 +42,44 @@
 int main(void) {
 	// Initialisation
 	Init_TI_Board(); // Initialisation of Port E and G
+	int zustand, alterZustand, drehung, drehungTMP, e;
+	int e_phase = 0;
+	alterZustand = PHASE_A;
+	setLED(LED_D18); // zum Testen
+	
 	while (1) { // super loop
 		
-		setLED(LED_D18); // zum Testen
+		
 		// resetLED(LED_D18); // zum Testen
-		resetErrorLED(); // wenn Taste S6 gedrückt wird, geht LED D18 aus
+	
 		
-		int zustand1, zustand2, drehung, drehungTMP, e;
-		e = readDrehgeber(&zustand1); // Zustand 1 einlesen
-		e = readDrehgeber(&zustand2); // Zustand 2 einlesen
-	  e = getDrehrichtung(&zustand1, &zustand2, &drehung);
+		/* Einlesen */
 		
+		e = readDrehgeber(&zustand); // Zustand einlesen
+		
+		
+		/* Update */
+	  
+		
+		
+		
+		/* Ausgabe berechnen */
+		e_phase = getDrehrichtung(&zustand, &alterZustand, &drehung);
+		
+		
+		
+		/* Ausgabe */
+		drehungToLED(drehung);
 		zaehlerstandToLED(getAnzahlSchritte());
 		zaehlerstandToTFT(getAnzahlSchritte());
-		
-		// Ausgabe zum Testen
-		TFT_cls();
-//		TFT_puts("Zustand 1: ");
-//		switch (zustand1) {
-//			case PHASE_A: TFT_puts("Phase A"); break;
-//			case PHASE_B: TFT_puts("Phase B"); break;
-//			case PHASE_C: TFT_puts("Phase C"); break;
-//			case PHASE_D: TFT_puts("Phase D"); break;
-//		}
-//		TFT_puts("; Zustand 2: ");
-//		switch (zustand2) {
-//			case PHASE_A: TFT_puts("Phase A"); break;
-//			case PHASE_B: TFT_puts("Phase B"); break;
-//			case PHASE_C: TFT_puts("Phase C"); break;
-//			case PHASE_D: TFT_puts("Phase D"); break;
-//		}
-		if (drehung != drehungTMP){
-			TFT_puts("; Drehung: ");
-			switch (drehung) {
-				case FORWARD: TFT_puts("vorwaerts"); break;
-				case BACKWARD: TFT_puts("rueckwaerts"); break;
-				case NO_CHANGE: TFT_puts("keine Drehung"); break;
-				default: TFT_puts("Fehler");
-			}
+		resetErrorLED(); // wenn Taste S6 gedrückt wird, geht LED D18 aus
+		resetSchrittzaehler();
+		if (e_phase == PHASE_ERROR) {
+			setLED(LED_D18);
 		}
-		drehungTMP = drehung;
+	
+		// Aktualisierung Zustand
+		alterZustand = zustand;
   }
 }
 
