@@ -32,6 +32,10 @@ int readDrehgeber(int* zustand) {
 	}
 }
 
+int isPressed(int button) {
+	return readGPIOPin(BUTTON_PORT, button);
+}
+
 int readGPIO(int number, int* value) {
 	if ((number > 0) && (number < 15)){
 		*value = readGPIOPin(BUTTON_PORT, number);

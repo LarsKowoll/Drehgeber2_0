@@ -6,6 +6,8 @@
 #define BUTTON_PORT		GPIOE
 #define KANAL_A				0				// Kanal A des Drehgebers
 #define KANAL_B				1				// Kanal B des Drehgebers
+#define TASTE_S6			6
+#define TASTE_S7			7
 
 #define LED_PORT			GPIOG
 #define LED_D18				5

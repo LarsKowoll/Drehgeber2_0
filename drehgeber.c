@@ -77,5 +77,10 @@ int getAnzahlSchritte(){
 void setAnzahlSchritte(int zahl){
 	anzahlSchritte = zahl;
 }
+
+int berechneWinkel(void) {
+	double winkel = anzahlSchritte * 0.3;
+	return (int) winkel;
+}
 		
 //EOF

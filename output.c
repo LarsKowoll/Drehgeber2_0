@@ -11,37 +11,29 @@
 char binary[8];
 int alterZaehlerstand;
 
+void Init_Output(void) {
+	TFT_cls();
+	
+	TFT_gotoxy(7, 5);
+	TFT_puts("Schritte: ");
+	
+	TFT_gotoxy(7, 6);
+	TFT_puts("Winkel: ");
+	TFT_gotoxy(28, 6);
+	TFT_puts("Grad");
+	
+	TFT_gotoxy(7, 7);
+	TFT_puts("Geschwindigkeit: ");
+	TFT_gotoxy(28, 7);
+	TFT_puts("Grad/s");
+}
+
 void setLED(int led) {
 	setGPIOPin(LED_PORT, led);
 }
 
 void resetLED(int led) {
 	resetGPIOPin(LED_PORT, led);
-}
-
-/** @brief Setzt LED D18 zurück, wenn Taste S6 gedrückt wurde */
-int resetErrorLED(void) {
-	int value, e;
-	int taste = 6;
-	e = readGPIO(taste, &value);
-	
-	if (value == 1) {
-		resetLED(LED_D18);
-	}
-	
-	return e;
-}
-
-int resetSchrittzaehler(void) {
-	int value = 0;
-	int e = 0;
-	int taste = 7;
-	e = readGPIO(taste, &value);
-	
-	if (value == 1) {
-		setAnzahlSchritte(0);
-	}
-	return e;
 }
 
 void intToBinary(int zahl) {
@@ -62,6 +54,7 @@ int drehungToLED(int drehung) {
 		setLED(LED_D19);
 		resetLED(LED_D20);
 	}
+	return EOK;
 }
 
 int zaehlerstandToLED(int zaehlerstand) {	
@@ -75,6 +68,7 @@ int zaehlerstandToLED(int zaehlerstand) {
 			resetLED(led + i);
 		}
 	}
+	return EOK;
 }
 
 int zaehlerstandToTFT(int zaehlerstand) {
@@ -85,6 +79,15 @@ int zaehlerstandToTFT(int zaehlerstand) {
 		TFT_puts(outputString);
 	}
 	alterZaehlerstand = zaehlerstand;
+	return EOK;
+}
+
+int winkelToTFT(void) {
+	int winkel = berechneWinkel();
+	TFT_gotoxy(24, 6);
+	char outputString[12];
+	sprintf(outputString, "%d", winkel);
+	TFT_puts(outputString);
 	return EOK;
 }
 	
