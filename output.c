@@ -90,6 +90,15 @@ int winkelToTFT(void) {
 	TFT_puts(outputString);
 	return EOK;
 }
+
+int winkelGeschwindigkeitToTFT(void) {
+	int winkelGeschwindigkeit = berechneWinkelgeschwindigkeit();
+	TFT_gotoxy(24, 7);
+	char outputString[12];
+	sprintf(outputString, "%d", winkelGeschwindigkeit);
+	TFT_puts(outputString);
+	return EOK;
+}
 	
 
 //EOF

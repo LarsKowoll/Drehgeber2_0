@@ -83,6 +83,7 @@ int main(void) {
 		// TFT
 		zaehlerstandToTFT(getAnzahlSchritte());
 		winkelToTFT();
+		winkelGeschwindigkeitToTFT();
 		
 		// Tasten
 		if (taste_S6 == 1) { // wenn Taste S6 gedrückt wird, geht LED D18 aus

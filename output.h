@@ -9,6 +9,7 @@ int drehungToLED(int drehung);
 int zaehlerstandToLED(int zaehlerstand);
 int zaehlerstandToTFT(int zaehlerstand);
 int winkelToTFT(void);
+int winkelGeschwindigkeitToTFT(void);
 
 #endif	/* OUTPUT_H */
 //EOF

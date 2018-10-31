@@ -1,7 +1,12 @@
 
 #include "general.h"
+#include "newTimer.h"
+
+
+#define pulsesPerRevolution 1440;
 
 int anzahlSchritte = 0;
+double winkel = 0;
 
 int getDrehrichtung(int* zustand1, int* zustand2, int* drehung) {
 	switch (*zustand1) {
@@ -79,8 +84,14 @@ void setAnzahlSchritte(int zahl){
 }
 
 int berechneWinkel(void) {
-	double winkel = anzahlSchritte * 0.3;
+	winkel = anzahlSchritte * 360 / pulsesPerRevolution;
 	return (int) winkel;
+}
+
+int berechneWinkelgeschwindigkeit(void) {
+	double winkelInBogenmass = 2 * 3.14159265358979323846 * winkel / 360;
+	double winkelGeschwindigkeit = winkelInBogenmass / zeitSchritt();
+	return (int) winkelGeschwindigkeit;
 }
 		
 //EOF
