@@ -73,9 +73,10 @@ int zaehlerstandToLED(int zaehlerstand) {
 
 int zaehlerstandToTFT(int zaehlerstand) {
 	if (zaehlerstand != alterZaehlerstand) {
+		TFT_gotoxy(24, 5);
 		char outputString[12];
 		sprintf(outputString, "%d", zaehlerstand);
-		TFT_cls();
+		//TFT_cls();
 		TFT_puts(outputString);
 	}
 	alterZaehlerstand = zaehlerstand;
