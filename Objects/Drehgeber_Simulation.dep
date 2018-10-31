@@ -242,7 +242,7 @@ F (.\TI_BRD_LIB\Simulation\oneWireSTIM.ini)(0x5BD8A39F)()
 F (.\TI_BRD_LIB\Simulation\rotarySIM.ini)(0x5BD8A39F)()
 F (.\TI_BRD_LIB\Simulation\timer2SIM.ini)(0x5BD8A39F)()
 F (.\TI_BRD_LIB\Simulation\userSIM.ini)(0x5BD8A39F)()
-F (.\main.c)(0x5BD9A9FF)(--c99 -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\TI_BRD_LIB\Library -I .\TI_BRD_LIB\Simulated_Board-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\Inc\ST\STM32F10x-D__UVISION_VERSION="523" -DSIMULATION -DSTM32F10X_HD-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (.\main.c)(0x5BD9DAB9)(--c99 -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\TI_BRD_LIB\Library -I .\TI_BRD_LIB\Simulated_Board-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\Inc\ST\STM32F10x-D__UVISION_VERSION="523" -DSIMULATION -DSTM32F10X_HD-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x57F65B18)
 I (.\TI_BRD_LIB\Library\TI_Lib.h)(0x5BD8A39F)
 I (.\TI_BRD_LIB\Library\TI_memory_map.h)(0x5BD8A39F)
@@ -260,6 +260,7 @@ I (general.h)(0x5BD8A39F)
 I (input.h)(0x5BD8A39F)
 I (output.h)(0x5BD9A9FF)
 I (drehgeber.h)(0x5BD8A39F)
+I (newTimer.h)(0x5BD9DA42)
 F (.\gpio.c)(0x5BD8A39F)(--c99 -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\TI_BRD_LIB\Library -I .\TI_BRD_LIB\Simulated_Board-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\Inc\ST\STM32F10x-D__UVISION_VERSION="523" -DSIMULATION -DSTM32F10X_HD-o .\objects\gpio.o --omf_browse .\objects\gpio.crf --depend .\objects\gpio.d)
 I (gpio.h)(0x5BD8A39F)
 I (.\TI_BRD_LIB\Library\TI_memory_map.h)(0x5BD8A39F)
@@ -296,12 +297,12 @@ I (C:\Keil_v5\ARM\CMSIS\Include\core_cmFunc.h)(0x559D31EA)
 I (C:\Keil_v5\ARM\Inc\ST\STM32F10x\system_stm32f10x.h)(0x559D2740)
 I (.\TI_BRD_LIB\Library\tft.h)(0x5BD8A39F)
 I (drehgeber.h)(0x5BD8A39F)
-F (.\drehgeber.c)(0x5BD9A928)(--c99 -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\TI_BRD_LIB\Library -I .\TI_BRD_LIB\Simulated_Board-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\Inc\ST\STM32F10x-D__UVISION_VERSION="523" -DSIMULATION -DSTM32F10X_HD-o .\objects\drehgeber.o --omf_browse .\objects\drehgeber.crf --depend .\objects\drehgeber.d)
+F (.\drehgeber.c)(0x5BD9AA4A)(--c99 -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\TI_BRD_LIB\Library -I .\TI_BRD_LIB\Simulated_Board-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\Inc\ST\STM32F10x-D__UVISION_VERSION="523" -DSIMULATION -DSTM32F10X_HD-o .\objects\drehgeber.o --omf_browse .\objects\drehgeber.crf --depend .\objects\drehgeber.d)
 I (general.h)(0x5BD8A39F)
-I (newTimer.h)(0x5BD8A39F)
-F (.\newTimer.c)(0x5BD8A39F)(--c99 -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\TI_BRD_LIB\Library -I .\TI_BRD_LIB\Simulated_Board-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\Inc\ST\STM32F10x-D__UVISION_VERSION="523" -DSIMULATION -DSTM32F10X_HD-o .\objects\newtimer.o --omf_browse .\objects\newtimer.crf --depend .\objects\newtimer.d)
+I (newTimer.h)(0x5BD9DA42)
+F (.\newTimer.c)(0x5BD9DA42)(--c99 -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\TI_BRD_LIB\Library -I .\TI_BRD_LIB\Simulated_Board-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\Inc\ST\STM32F10x-D__UVISION_VERSION="523" -DSIMULATION -DSTM32F10X_HD-o .\objects\newtimer.o --omf_browse .\objects\newtimer.crf --depend .\objects\newtimer.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x57F65B18)
-I (newTimer.h)(0x5BD8A39F)
+I (newTimer.h)(0x5BD9DA42)
 I (.\TI_BRD_LIB\Library\timer.h)(0x5BD8A39F)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x57F65B18)
 F (.\main.s)(0x5BD8A39F)(--cpu Cortex-M3 --pd "__EVAL SETA 1" -g --apcs=interwork -IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\Inc\ST\STM32F10x--pd "__UVISION_VERSION SETA 523"--list .\listings\main.lst --xref -o .\objects\main.o --depend .\objects\main.d)
@@ -313,4 +314,4 @@ F (.\gpio.h)(0x5BD8A39F)()
 F (.\input.h)(0x5BD8A39F)()
 F (.\output.h)(0x5BD9A9FF)()
 F (.\drehgeber.h)(0x5BD8A39F)()
-F (.\newTimer.h)(0x5BD8A39F)()
+F (.\newTimer.h)(0x5BD9DA42)()

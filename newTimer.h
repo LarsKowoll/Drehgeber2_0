@@ -6,6 +6,7 @@ extern "C" {
 #endif
 	
 int zeitSchritt(void);
+void gespeicherteZeitAkt(void);
 
 #ifdef	__cplusplus
 }

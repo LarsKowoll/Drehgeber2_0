@@ -32,6 +32,7 @@
 #include "input.h"
 #include "output.h"
 #include "drehgeber.h"
+#include "newTimer.h"
 
 
 
@@ -52,6 +53,7 @@ int main(void) {
 	
 	int e = 0;
 	int e_phase = 0;
+	gespeicherteZeitAkt();
 	
 	while (1) { // super loop
 		

@@ -16,3 +16,4 @@
 .\objects\main.o: input.h
 .\objects\main.o: output.h
 .\objects\main.o: drehgeber.h
+.\objects\main.o: newTimer.h
