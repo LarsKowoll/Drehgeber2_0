@@ -3,17 +3,18 @@
 
 #include "timer.h"
 
-int gespeicherteZeit = 0;
+#define schrittTeiler 1000000 //Schritte pro Sekunde
+
+int startZeit = 0;
 
 int zeitSchritt(void){
 	int aktuelleZeit = getTimeStamp();
-	
-	int zeitDif = aktuelleZeit - gespeicherteZeit;
-	gespeicherteZeit = aktuelleZeit;
+	int zeitDif = aktuelleZeit - startZeit;
+	zeitDif = (zeitDif / CONVERT2US) / schrittTeiler;
 	return zeitDif;
 }
 
 void gespeicherteZeitAkt(void){
-	gespeicherteZeit = getTimeStamp();
+	startZeit = getTimeStamp();
 }
 	

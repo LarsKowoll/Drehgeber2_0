@@ -7,6 +7,9 @@
 #include "drehgeber.h"
 
 #define maxIntegerLaenge 20
+#define INT_TO_STRING_LENGTH 20
+#define OUT_STRING_LENGTH 100
+
 
 char binary[8];
 int alterZaehlerstand;
@@ -58,6 +61,10 @@ int drehungToLED(int drehung) {
 }
 
 int zaehlerstandToLED(int zaehlerstand) {	
+	if (zaehlerstand < 0)
+	{
+		zaehlerstand = zaehlerstand * -1;
+	}
 	intToBinary(zaehlerstand);
 	int led = 8;
 	for (int i = 0; i < 8; i++) {
@@ -72,12 +79,14 @@ int zaehlerstandToLED(int zaehlerstand) {
 }
 
 int zaehlerstandToTFT(int zaehlerstand) {
-	if (zaehlerstand != alterZaehlerstand) {
+	if (1 || zaehlerstand != alterZaehlerstand) {
 		TFT_gotoxy(24, 5);
 		char outputString[12];
 		sprintf(outputString, "%d", zaehlerstand);
 		//TFT_cls();
+	//	intToString(zaehlerstand, outputString);
 		TFT_puts(outputString);
+		TFT_puts("      ");
 	}
 	alterZaehlerstand = zaehlerstand;
 	return EOK;
@@ -88,7 +97,9 @@ int winkelToTFT(void) {
 	TFT_gotoxy(24, 6);
 	char outputString[12];
 	sprintf(outputString, "%d", winkel);
+	//intToString(winkel, outputString);
 	TFT_puts(outputString);
+	TFT_puts("      ");
 	return EOK;
 }
 
@@ -97,9 +108,12 @@ int winkelGeschwindigkeitToTFT(void) {
 	TFT_gotoxy(24, 7);
 	char outputString[12];
 	sprintf(outputString, "%d", winkelGeschwindigkeit);
+	//intToString(winkelGeschwindigkeit, outputString);
 	TFT_puts(outputString);
+	TFT_puts("      ");
 	return EOK;
 }
-	
+
+
 
 //EOF

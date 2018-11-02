@@ -33,6 +33,7 @@
 #include "output.h"
 #include "drehgeber.h"
 #include "newTimer.h"
+#include "timer.h"
 
 
 
@@ -44,6 +45,8 @@ int main(void) {
 	// Initialisation
 	Init_TI_Board(); // Initialisation of Port E and G
 	Init_Output();
+	timerinit();
+
 	
 	int zustand = PHASE_A;
 	int alterZustand = PHASE_A;
@@ -92,6 +95,8 @@ int main(void) {
 			resetLED(LED_D18);
 		}
 		if (taste_S7 == 1) { // wenn Taste S7 gedrückt wird, wird der Zählerstand zurückgesetzt
+			TFT_cls();
+			Init_Output();
 			setAnzahlSchritte(0);
 		}
 		
