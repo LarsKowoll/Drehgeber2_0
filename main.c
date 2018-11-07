@@ -95,6 +95,8 @@ int main(void) {
 			resetLED(LED_D18);
 		}
 		if (taste_S7 == 1) { // wenn Taste S7 gedrückt wird, wird der Zählerstand zurückgesetzt
+			resetLED(LED_D19);
+			resetLED(LED_D20);
 			TFT_cls();
 			Init_Output();
 			setAnzahlSchritte(0);

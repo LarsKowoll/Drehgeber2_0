@@ -5,6 +5,7 @@
 
 
 int anzahlSchritte = 0;
+int winkelInDezGrad;
 int winkel = 0;
 int winkelDif;
 int alterWinkel;
@@ -85,20 +86,22 @@ void setAnzahlSchritte(int zahl){
 }
 
 int berechneWinkel(void) {
-	int winkelInDezGrad = anzahlSchritte * 3;
+	winkelInDezGrad = anzahlSchritte * 3;
 	winkel = winkelInDezGrad/10;
-	if (alterWinkel != winkel){
-		winkelDif = winkel - alterWinkel;
-		alterWinkel = winkel;
-	} else {
-		winkelDif = 0;
-	}
-	
 	return winkel;
 }
 
 int berechneWinkelgeschwindigkeit(void) {	
-	int winkelGeschwindigkeit = winkelDif / zeitSchritt();
+	int zeit = zeitSchritt();
+	if (zeit == 1) {
+		if (alterWinkel != winkel){
+			winkelDif = winkel - alterWinkel;
+			alterWinkel = winkel;
+		} else {
+			winkelDif = 0;
+		}
+	}
+	int winkelGeschwindigkeit = winkelDif;
 	return winkelGeschwindigkeit;
 }
 		
