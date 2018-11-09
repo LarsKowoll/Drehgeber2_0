@@ -1,16 +1,19 @@
 
 #include "general.h"
 #include "newTimer.h"
+#include "output.h"
 
 
 
 int anzahlSchritte = 0;
-int winkelInDezGrad;
+int winkelInDezGrad = 0;
 int winkel = 0;
 int winkelDif;
 int alterWinkel;
 
+
 int getDrehrichtung(int* zustand1, int* zustand2, int* drehung) {
+	int timeStep = 0;
 	switch (*zustand1) {
 		case PHASE_A:
 				switch (*zustand2) {
@@ -18,10 +21,16 @@ int getDrehrichtung(int* zustand1, int* zustand2, int* drehung) {
 					              break;
 					case PHASE_B: *drehung = FORWARD;
 												anzahlSchritte++;
+												stageStepCounter(anzahlSchritte);
+												zeitSchritt(&timeStep, anzahlSchritte);
+												stageLastSpeed(timeStep);
 					              break;
 					case PHASE_C: return PHASE_ERROR;
 					case PHASE_D: *drehung = BACKWARD;
 												anzahlSchritte--;
+												stageStepCounter(anzahlSchritte);
+												zeitSchritt(&timeStep, anzahlSchritte);
+												stageLastSpeed(timeStep);
 					              break;
 					default: return PHASE_ERROR; // ungültige Eingabe für Zustand 2
 				}
@@ -31,11 +40,17 @@ int getDrehrichtung(int* zustand1, int* zustand2, int* drehung) {
 				switch (*zustand2) {
 					case PHASE_A: *drehung = BACKWARD;
 												anzahlSchritte--;
+												stageStepCounter(anzahlSchritte);
+												zeitSchritt(&timeStep, anzahlSchritte);
+												stageLastSpeed(timeStep);
 					              break;
 					case PHASE_B: *drehung = NO_CHANGE;
 					              break;
 					case PHASE_C: *drehung = FORWARD;
 												anzahlSchritte++;
+												stageStepCounter(anzahlSchritte);
+												zeitSchritt(&timeStep, anzahlSchritte);
+												stageLastSpeed(timeStep);
 					              break;
 					case PHASE_D: return PHASE_ERROR;
 					default: return PHASE_ERROR; // ungültige Eingabe für Zustand 2
@@ -47,11 +62,17 @@ int getDrehrichtung(int* zustand1, int* zustand2, int* drehung) {
 					case PHASE_A: return PHASE_ERROR;
 					case PHASE_B: *drehung = BACKWARD;
 												anzahlSchritte--;
+												stageStepCounter(anzahlSchritte);
+												zeitSchritt(&timeStep, anzahlSchritte);
+												stageLastSpeed(timeStep);
 					              break;
 					case PHASE_C: *drehung = NO_CHANGE;
 					              break;
 					case PHASE_D: *drehung = FORWARD;
 												anzahlSchritte++;
+												stageStepCounter(anzahlSchritte);
+												zeitSchritt(&timeStep, anzahlSchritte);
+												stageLastSpeed(timeStep);
 					              break;
 					default: return PHASE_ERROR; // ungültige Eingabe für Zustand 2
 				}
@@ -61,10 +82,16 @@ int getDrehrichtung(int* zustand1, int* zustand2, int* drehung) {
 				switch (*zustand2) {
 					case PHASE_A: *drehung = FORWARD;
 												anzahlSchritte++;
+												stageStepCounter(anzahlSchritte);
+												zeitSchritt(&timeStep, anzahlSchritte);
+												stageLastSpeed(timeStep);
 					              break;
 					case PHASE_B: return PHASE_ERROR;
 					case PHASE_C: *drehung = BACKWARD;
 												anzahlSchritte--;
+												stageStepCounter(anzahlSchritte);
+												zeitSchritt(&timeStep, anzahlSchritte);
+												stageLastSpeed(timeStep);
 					              break;
 					case PHASE_D: *drehung = NO_CHANGE;
 					              break;
@@ -91,18 +118,18 @@ int berechneWinkel(void) {
 	return winkel;
 }
 
-int berechneWinkelgeschwindigkeit(void) {	
-	int zeit = zeitSchritt();
-	if (zeit == 1) {
-		if (alterWinkel != winkel){
-			winkelDif = winkel - alterWinkel;
-			alterWinkel = winkel;
-		} else {
-			winkelDif = 0;
-		}
-	}
-	int winkelGeschwindigkeit = winkelDif;
-	return winkelGeschwindigkeit;
-}
+//int berechneWinkelgeschwindigkeit(void) {	
+//	int zeit = zeitSchritt();
+//	if (zeit == 1) {
+//		if (alterWinkel != winkel){
+//			winkelDif = winkel - alterWinkel;
+//			alterWinkel = winkel;
+//		} else {
+//			winkelDif = 0;
+//		}
+//	}
+//	int winkelGeschwindigkeit = winkelDif;
+//	return winkelGeschwindigkeit;
+//}
 		
 //EOF

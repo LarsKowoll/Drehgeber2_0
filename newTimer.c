@@ -3,19 +3,31 @@
 
 #include "timer.h"
 
-#define schrittTeiler 1000000 //Schritte pro Sekunde
+#define schrittTeiler 100000000 //Schritte pro Sekunde
+#define messfenster 50
 
 int startZeit = 0;
+int counter = 0;
+long long timeSum = 0;
 
-int zeitSchritt(void){
+void zeitSchritt(int* steps_per_s, int schrittZaehler){
 	int aktuelleZeit = getTimeStamp();
-	int zeitDif = aktuelleZeit - startZeit;
-	if (zeitDif == (CONVERT2US * schrittTeiler)) {
-		startZeit = aktuelleZeit;
-		return 1;
+	int zeitDif = 0;
+	counter++;
+	
+	zeitDif = aktuelleZeit - startZeit;
+	startZeit = aktuelleZeit;
+	
+	if (counter > messfenster){
+		timeSum = 0;
+		counter = 1;
 	}
-	//zeitDif = (zeitDif / CONVERT2US) / schrittTeiler;
-	return 0;
+	
+	timeSum = timeSum + zeitDif;
+	int durchSchnitt = timeSum / counter;
+
+
+	*steps_per_s = (schrittTeiler / (durchSchnitt)) * CONVERT2US;
 }
 
 void gespeicherteZeitAkt(void){
