@@ -35,25 +35,30 @@
 #include "newTimer.h"
 #include "timer.h"
 
-
+int zustand = 0;
+int alterZustand = 0;
 
 /**
   * @brief  Main program
   * @param  None
   */
+
 int main(void) {
 	//------------------------------------------Initialisation------------------------------------------
 	Init_TI_Board(); // Initialisation of Port E and G
 	Init_Output();
 	timerinit();
-
-	int zustand = PHASE_A;
-	int alterZustand = PHASE_A;
+	
+	int e = 0;
+	e = readDrehgeber(&zustand);
+	e = readDrehgeber(&alterZustand);
+	
+	int alterZustand = zustand;
 	int drehung = NO_CHANGE;
 	int taste_S6 = 0;
 	int taste_S7 = 0;
 	
-	int e = 0;
+	
 	int e_phase = 0;
 	gespeicherteZeitAkt();
 	
