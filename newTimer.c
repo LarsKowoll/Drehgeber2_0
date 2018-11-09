@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "newTimer.h"
-
 #include "timer.h"
 
 #define schrittTeiler 100000000 //Schritte pro Sekunde
@@ -10,7 +9,7 @@ int startZeit = 0;
 int counter = 0;
 long long timeSum = 0;
 
-void zeitSchritt(int* steps_per_s, int schrittZaehler){
+void zeitSchritt(int* schritteProSekunde, int schrittZaehler){
 	int aktuelleZeit = getTimeStamp();
 	int zeitDif = 0;
 	counter++;
@@ -27,7 +26,7 @@ void zeitSchritt(int* steps_per_s, int schrittZaehler){
 	int durchSchnitt = timeSum / counter;
 
 
-	*steps_per_s = (schrittTeiler / (durchSchnitt)) * CONVERT2US;
+	*schritteProSekunde = (schrittTeiler / (durchSchnitt)) * CONVERT2US;
 }
 
 void gespeicherteZeitAkt(void){

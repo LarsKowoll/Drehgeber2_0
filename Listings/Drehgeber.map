@@ -295,15 +295,15 @@ Section Cross References
     main.o(i.main) refers to output.o(i.Init_Output) for Init_Output
     main.o(i.main) refers to timer.o(i.timerinit) for timerinit
     main.o(i.main) refers to newtimer.o(i.gespeicherteZeitAkt) for gespeicherteZeitAkt
-    main.o(i.main) refers to output.o(i.resetLED) for resetLED
     main.o(i.main) refers to input.o(i.readDrehgeber) for readDrehgeber
     main.o(i.main) refers to input.o(i.isPressed) for isPressed
     main.o(i.main) refers to drehgeber.o(i.getDrehrichtung) for getDrehrichtung
     main.o(i.main) refers to output.o(i.drehungToLED) for drehungToLED
     main.o(i.main) refers to drehgeber.o(i.getAnzahlSchritte) for getAnzahlSchritte
     main.o(i.main) refers to output.o(i.zaehlerstandToLED) for zaehlerstandToLED
+    main.o(i.main) refers to output.o(i.aktualisiereTFTAusgabe) for aktualisiereTFTAusgabe
     main.o(i.main) refers to output.o(i.setLED) for setLED
-    main.o(i.main) refers to output.o(i.writeNextBufferValue) for writeNextBufferValue
+    main.o(i.main) refers to output.o(i.resetLED) for resetLED
     main.o(i.main) refers to drehgeber.o(i.setAnzahlSchritte) for setAnzahlSchritte
     input.o(i.isPressed) refers to gpio.o(i.readGPIOPin) for readGPIOPin
     input.o(i.readDrehgeber) refers to gpio.o(i.readGPIOPin) for readGPIOPin
@@ -312,30 +312,27 @@ Section Cross References
     output.o(i.Init_Output) refers to tft.o(i.TFT_gotoxy) for TFT_gotoxy
     output.o(i.Init_Output) refers to tft.o(i.TFT_puts) for TFT_puts
     output.o(i.Init_Output) refers to output.o(.bss) for schritteString
+    output.o(i.aktualisiereTFTAusgabe) refers to drehgeber.o(i.getAnzahlSchritte) for getAnzahlSchritte
+    output.o(i.aktualisiereTFTAusgabe) refers to output.o(i.intToString) for intToString
+    output.o(i.aktualisiereTFTAusgabe) refers to tft.o(i.TFT_gotoxy) for TFT_gotoxy
+    output.o(i.aktualisiereTFTAusgabe) refers to tft.o(i.TFT_putc) for TFT_putc
+    output.o(i.aktualisiereTFTAusgabe) refers to drehgeber.o(i.berechneWinkel) for berechneWinkel
+    output.o(i.aktualisiereTFTAusgabe) refers to output.o(.data) for currentStatus
+    output.o(i.aktualisiereTFTAusgabe) refers to output.o(.bss) for schritteString
+    output.o(i.aktualsiereWerte) refers to output.o(.data) for SchritteHatNeuenWert
     output.o(i.drehungToLED) refers to output.o(i.setLED) for setLED
     output.o(i.drehungToLED) refers to output.o(i.resetLED) for resetLED
     output.o(i.intToBinary) refers to output.o(.data) for binary
     output.o(i.resetLED) refers to gpio.o(i.resetGPIOPin) for resetGPIOPin
     output.o(i.setLED) refers to gpio.o(i.setGPIOPin) for setGPIOPin
-    output.o(i.stageLastSpeed) refers to output.o(.data) for newDegValue
-    output.o(i.stageRotationMode) refers to output.o(.data) for stagedRotMode
-    output.o(i.stageStepCounter) refers to output.o(.data) for newStepValue
-    output.o(i.writeNextBufferValue) refers to drehgeber.o(i.getAnzahlSchritte) for getAnzahlSchritte
-    output.o(i.writeNextBufferValue) refers to output.o(i.intToString) for intToString
-    output.o(i.writeNextBufferValue) refers to tft.o(i.TFT_gotoxy) for TFT_gotoxy
-    output.o(i.writeNextBufferValue) refers to tft.o(i.TFT_putc) for TFT_putc
-    output.o(i.writeNextBufferValue) refers to drehgeber.o(i.berechneWinkel) for berechneWinkel
-    output.o(i.writeNextBufferValue) refers to output.o(.data) for LineCounter
-    output.o(i.writeNextBufferValue) refers to output.o(.bss) for schritteString
     output.o(i.zaehlerstandToLED) refers to output.o(i.intToBinary) for intToBinary
     output.o(i.zaehlerstandToLED) refers to output.o(i.setLED) for setLED
     output.o(i.zaehlerstandToLED) refers to output.o(i.resetLED) for resetLED
     output.o(i.zaehlerstandToLED) refers to output.o(.data) for binary
     drehgeber.o(i.berechneWinkel) refers to drehgeber.o(.data) for anzahlSchritte
     drehgeber.o(i.getAnzahlSchritte) refers to drehgeber.o(.data) for anzahlSchritte
-    drehgeber.o(i.getDrehrichtung) refers to output.o(i.stageStepCounter) for stageStepCounter
     drehgeber.o(i.getDrehrichtung) refers to newtimer.o(i.zeitSchritt) for zeitSchritt
-    drehgeber.o(i.getDrehrichtung) refers to output.o(i.stageLastSpeed) for stageLastSpeed
+    drehgeber.o(i.getDrehrichtung) refers to output.o(i.aktualsiereWerte) for aktualsiereWerte
     drehgeber.o(i.getDrehrichtung) refers to drehgeber.o(.data) for anzahlSchritte
     drehgeber.o(i.setAnzahlSchritte) refers to drehgeber.o(.data) for anzahlSchritte
     newtimer.o(i.gespeicherteZeitAkt) refers to timer.o(i.getTimeStamp) for getTimeStamp
@@ -732,9 +729,8 @@ Removing Unused input sections from the image.
     Removing input.o(i.readGPIO), (44 bytes).
     Removing output.o(.rev16_text), (4 bytes).
     Removing output.o(.revsh_text), (4 bytes).
-    Removing output.o(i.stageRotationMode), (12 bytes).
 
-233 unused section(s) (total 29414 bytes) removed from the image.
+232 unused section(s) (total 29402 bytes) removed from the image.
 
 ==============================================================================
 
@@ -744,21 +740,21 @@ Image Symbol Table
 
     Symbol Name                              Value     Ov Type        Size  Object(Section)
 
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardshut.o ABSOLUTE
     ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit3.o ABSOLUTE
     ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit2.o ABSOLUTE
     ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit1.o ABSOLUTE
-    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardshut.o ABSOLUTE
-    ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_copy.o ABSOLUTE
     ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_zi.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit2.o ABSOLUTE
+    ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_copy.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry4.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry2.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry.o ABSOLUTE
-    ../clib/angel/rt.s                       0x00000000   Number         0  rt_raise.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry2.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit2.o ABSOLUTE
+    ../clib/angel/rt.s                       0x00000000   Number         0  aeabi_ldiv0.o ABSOLUTE
     ../clib/angel/rt.s                       0x00000000   Number         0  aeabi_ldiv0_sigfpe.o ABSOLUTE
     ../clib/angel/rt.s                       0x00000000   Number         0  rt_div0.o ABSOLUTE
-    ../clib/angel/rt.s                       0x00000000   Number         0  aeabi_ldiv0.o ABSOLUTE
+    ../clib/angel/rt.s                       0x00000000   Number         0  rt_raise.o ABSOLUTE
     ../clib/angel/scatter.s                  0x00000000   Number         0  __scatter.o ABSOLUTE
     ../clib/angel/startup.s                  0x00000000   Number         0  __main.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  sys_stackheap_outer.o ABSOLUTE
@@ -769,62 +765,62 @@ Image Symbol Table
     ../clib/armsys.c                         0x00000000   Number         0  _get_argv_nomalloc.o ABSOLUTE
     ../clib/heapalloc.c                      0x00000000   Number         0  hrguard.o ABSOLUTE
     ../clib/heapaux.c                        0x00000000   Number         0  heapauxi.o ABSOLUTE
-    ../clib/libinit.s                        0x00000000   Number         0  libshutdown2.o ABSOLUTE
     ../clib/libinit.s                        0x00000000   Number         0  libinit.o ABSOLUTE
-    ../clib/libinit.s                        0x00000000   Number         0  libinit2.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libshutdown2.o ABSOLUTE
     ../clib/libinit.s                        0x00000000   Number         0  libshutdown.o ABSOLUTE
-    ../clib/longlong.s                       0x00000000   Number         0  llsdiv.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libinit2.o ABSOLUTE
     ../clib/longlong.s                       0x00000000   Number         0  lludivv7m.o ABSOLUTE
-    ../clib/memcpset.s                       0x00000000   Number         0  rt_memclr_w.o ABSOLUTE
+    ../clib/longlong.s                       0x00000000   Number         0  llsdiv.o ABSOLUTE
     ../clib/memcpset.s                       0x00000000   Number         0  rt_memcpy_w.o ABSOLUTE
+    ../clib/memcpset.s                       0x00000000   Number         0  rt_memclr_w.o ABSOLUTE
     ../clib/misc.s                           0x00000000   Number         0  printf_stubs.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  _snputc.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  __printf_wp.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  __printf_flags_ss.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  __printf_nopercent.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  __printf_ss.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  _printf_char_file.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  _printf_dec.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  _sputc.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  __printf_flags.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  _printf_char_common.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  _printf_hex_int_ll_ptr.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  _printf_hex_int.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  _printf_hex_ll.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  _printf_hex_ll_ptr.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  _printf_pad.o ABSOLUTE
     ../clib/printf.c                         0x00000000   Number         0  __printf.o ABSOLUTE
     ../clib/printf.c                         0x00000000   Number         0  noretval__2snprintf.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  _snputc.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  __printf_nopercent.o ABSOLUTE
     ../clib/printf.c                         0x00000000   Number         0  noretval__2printf.o ABSOLUTE
     ../clib/printf.c                         0x00000000   Number         0  __2snprintf.o ABSOLUTE
     ../clib/printf.c                         0x00000000   Number         0  __2printf.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  _printf_intcommon.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  _printf_char_common.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  _sputc.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  __printf_flags_ss_wp.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  _printf_char_file.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  __printf_ss_wp.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  __printf_flags_wp.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  __printf_wp.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  __printf_flags_ss.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  __printf_ss.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  __printf_flags.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  _printf_hex_int_ll_ptr.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  _printf_hex_ll_ptr.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  _printf_hex_int_ptr.o ABSOLUTE
     ../clib/printf.c                         0x00000000   Number         0  _printf_hex_ptr.o ABSOLUTE
     ../clib/printf.c                         0x00000000   Number         0  _printf_hex_int_ll.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  _printf_hex_int_ptr.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  __printf_flags_wp.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  __printf_flags_ss_wp.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  _printf_intcommon.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  __printf_ss_wp.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  _printf_hex_int.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  _printf_hex_ll.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  _printf_dec.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  _printf_pad.o ABSOLUTE
+    ../clib/printf_percent.s                 0x00000000   Number         0  _printf_d.o ABSOLUTE
     ../clib/printf_percent.s                 0x00000000   Number         0  _printf_percent_end.o ABSOLUTE
     ../clib/printf_percent.s                 0x00000000   Number         0  _printf_x.o ABSOLUTE
-    ../clib/printf_percent.s                 0x00000000   Number         0  _printf_d.o ABSOLUTE
     ../clib/printf_percent.s                 0x00000000   Number         0  _printf_percent.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_general.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_other.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_segv_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_cppl_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_pvfn_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_stak_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtred_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_abrt_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_formal.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_outer.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_other.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_segv_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  __raise.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_cppl_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_pvfn_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_exit.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_general.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_stak_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_formal.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_outer.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtred_inner.o ABSOLUTE
     ../clib/signal.s                         0x00000000   Number         0  defsig.o ABSOLUTE
     ../clib/stdlib.c                         0x00000000   Number         0  exit.o ABSOLUTE
     ../clib/string.c                         0x00000000   Number         0  strlen.o ABSOLUTE
@@ -961,32 +957,31 @@ Image Symbol Table
     i.USART_Init                             0x08001570   Section        0  stm32f4xx_usart.o(i.USART_Init)
     i.USART_OverSampling8Cmd                 0x0800177c   Section        0  stm32f4xx_usart.o(i.USART_OverSampling8Cmd)
     i._sys_exit                              0x0800181c   Section        0  retarget.o(i._sys_exit)
-    i.assert_failed                          0x08001820   Section        0  assert.o(i.assert_failed)
-    i.berechneWinkel                         0x08001824   Section        0  drehgeber.o(i.berechneWinkel)
-    i.drehungToLED                           0x08001850   Section        0  output.o(i.drehungToLED)
-    i.gespeicherteZeitAkt                    0x0800187c   Section        0  newtimer.o(i.gespeicherteZeitAkt)
-    i.getAnzahlSchritte                      0x0800188c   Section        0  drehgeber.o(i.getAnzahlSchritte)
-    i.getDrehrichtung                        0x08001898   Section        0  drehgeber.o(i.getDrehrichtung)
-    i.getTimeStamp                           0x08001aac   Section        0  timer.o(i.getTimeStamp)
-    i.intToBinary                            0x08001ab4   Section        0  output.o(i.intToBinary)
-    i.intToString                            0x08001ae4   Section        0  output.o(i.intToString)
-    i.isPressed                              0x08001b5c   Section        0  input.o(i.isPressed)
-    i.main                                   0x08001b70   Section        0  main.o(i.main)
-    i.readDrehgeber                          0x08001c0c   Section        0  input.o(i.readDrehgeber)
-    i.readGPIOPin                            0x08001c5c   Section        0  gpio.o(i.readGPIOPin)
-    i.resetGPIOPin                           0x08001c84   Section        0  gpio.o(i.resetGPIOPin)
-    i.resetLED                               0x08001ca0   Section        0  output.o(i.resetLED)
-    i.setAnzahlSchritte                      0x08001cb4   Section        0  drehgeber.o(i.setAnzahlSchritte)
-    i.setGPIOPin                             0x08001cc0   Section        0  gpio.o(i.setGPIOPin)
-    i.setLED                                 0x08001cdc   Section        0  output.o(i.setLED)
-    i.stageLastSpeed                         0x08001cf0   Section        0  output.o(i.stageLastSpeed)
-    i.stageStepCounter                       0x08001d04   Section        0  output.o(i.stageStepCounter)
-    i.timerinit                              0x08001d18   Section        0  timer.o(i.timerinit)
-    i.writeNextBufferValue                   0x08001d40   Section        0  output.o(i.writeNextBufferValue)
-    i.zaehlerstandToLED                      0x08001f88   Section        0  output.o(i.zaehlerstandToLED)
-    i.zeitSchritt                            0x08001fc4   Section        0  newtimer.o(i.zeitSchritt)
-    x$fpl$fpinit                             0x08002040   Section       10  fpinit.o(x$fpl$fpinit)
-    $v0                                      0x08002040   Number         0  fpinit.o(x$fpl$fpinit)
+    i.aktualisiereTFTAusgabe                 0x08001820   Section        0  output.o(i.aktualisiereTFTAusgabe)
+    i.aktualsiereWerte                       0x08001a68   Section        0  output.o(i.aktualsiereWerte)
+    i.assert_failed                          0x08001a84   Section        0  assert.o(i.assert_failed)
+    i.berechneWinkel                         0x08001a88   Section        0  drehgeber.o(i.berechneWinkel)
+    i.drehungToLED                           0x08001ab4   Section        0  output.o(i.drehungToLED)
+    i.gespeicherteZeitAkt                    0x08001ae0   Section        0  newtimer.o(i.gespeicherteZeitAkt)
+    i.getAnzahlSchritte                      0x08001af0   Section        0  drehgeber.o(i.getAnzahlSchritte)
+    i.getDrehrichtung                        0x08001afc   Section        0  drehgeber.o(i.getDrehrichtung)
+    i.getTimeStamp                           0x08001cd0   Section        0  timer.o(i.getTimeStamp)
+    i.intToBinary                            0x08001cd8   Section        0  output.o(i.intToBinary)
+    i.intToString                            0x08001d08   Section        0  output.o(i.intToString)
+    i.isPressed                              0x08001d80   Section        0  input.o(i.isPressed)
+    i.main                                   0x08001d94   Section        0  main.o(i.main)
+    i.readDrehgeber                          0x08001e24   Section        0  input.o(i.readDrehgeber)
+    i.readGPIOPin                            0x08001e74   Section        0  gpio.o(i.readGPIOPin)
+    i.resetGPIOPin                           0x08001e9c   Section        0  gpio.o(i.resetGPIOPin)
+    i.resetLED                               0x08001eb8   Section        0  output.o(i.resetLED)
+    i.setAnzahlSchritte                      0x08001ecc   Section        0  drehgeber.o(i.setAnzahlSchritte)
+    i.setGPIOPin                             0x08001ed8   Section        0  gpio.o(i.setGPIOPin)
+    i.setLED                                 0x08001ef4   Section        0  output.o(i.setLED)
+    i.timerinit                              0x08001f08   Section        0  timer.o(i.timerinit)
+    i.zaehlerstandToLED                      0x08001f30   Section        0  output.o(i.zaehlerstandToLED)
+    i.zeitSchritt                            0x08001f6c   Section        0  newtimer.o(i.zeitSchritt)
+    x$fpl$fpinit                             0x08001fe8   Section       10  fpinit.o(x$fpl$fpinit)
+    $v0                                      0x08001fe8   Number         0  fpinit.o(x$fpl$fpinit)
     .data                                    0x20000000   Section        8  ti_lib.o(.data)
     TimingDelay                              0x20000000   Data           4  ti_lib.o(.data)
     uptime                                   0x20000004   Data           4  ti_lib.o(.data)
@@ -995,34 +990,32 @@ Image Symbol Table
     .data                                    0x20000018   Section       20  system_stm32f4xx.o(.data)
     .data                                    0x2000002c   Section        4  usart.o(.data)
     tx_restart                               0x2000002c   Data           4  usart.o(.data)
-    .data                                    0x20000030   Section       57  output.o(.data)
-    stagedRotMode                            0x2000003c   Data           4  output.o(.data)
-    stagedStepCounter                        0x20000040   Data           4  output.o(.data)
-    stagedSpeed                              0x20000044   Data           4  output.o(.data)
-    newStepValue                             0x20000048   Data           4  output.o(.data)
-    newDegValue                              0x2000004c   Data           4  output.o(.data)
-    schritteIndex                            0x20000050   Data           4  output.o(.data)
-    schritteLastIndex                        0x20000054   Data           4  output.o(.data)
-    geschwWinkelIndex                        0x20000058   Data           4  output.o(.data)
-    geschwWinkelLastIndex                    0x2000005c   Data           4  output.o(.data)
-    winkelIndex                              0x20000060   Data           4  output.o(.data)
-    winkelLastIndex                          0x20000064   Data           4  output.o(.data)
-    LineCounter                              0x20000068   Data           1  output.o(.data)
-    .data                                    0x2000006c   Section       20  drehgeber.o(.data)
-    .data                                    0x20000080   Section       16  newtimer.o(.data)
-    .bss                                     0x20000090   Section      528  usart.o(.bss)
-    rbuf                                     0x20000090   Data         264  usart.o(.bss)
-    tbuf                                     0x20000198   Data         264  usart.o(.bss)
-    .bss                                     0x200002a0   Section       60  output.o(.bss)
-    schritteString                           0x200002a0   Data          20  output.o(.bss)
-    geschwWinkelString                       0x200002b4   Data          20  output.o(.bss)
-    winkelString                             0x200002c8   Data          20  output.o(.bss)
-    .bss                                     0x200002dc   Section       96  libspace.o(.bss)
-    HEAP                                     0x20000340   Section    32768  startup_stm32f4xx.o(HEAP)
-    Heap_Mem                                 0x20000340   Data       32768  startup_stm32f4xx.o(HEAP)
-    STACK                                    0x20008340   Section     4096  startup_stm32f4xx.o(STACK)
-    Stack_Mem                                0x20008340   Data        4096  startup_stm32f4xx.o(STACK)
-    __initial_sp                             0x20009340   Data           0  startup_stm32f4xx.o(STACK)
+    .data                                    0x20000030   Section       49  output.o(.data)
+    stagedSpeed                              0x2000003c   Data           4  output.o(.data)
+    SchritteHatNeuenWert                     0x20000040   Data           4  output.o(.data)
+    WinkelHatNeuenWert                       0x20000044   Data           4  output.o(.data)
+    schritteIndex                            0x20000048   Data           4  output.o(.data)
+    schritteLastIndex                        0x2000004c   Data           4  output.o(.data)
+    geschwWinkelIndex                        0x20000050   Data           4  output.o(.data)
+    geschwWinkelLastIndex                    0x20000054   Data           4  output.o(.data)
+    winkelIndex                              0x20000058   Data           4  output.o(.data)
+    winkelLastIndex                          0x2000005c   Data           4  output.o(.data)
+    currentStatus                            0x20000060   Data           1  output.o(.data)
+    .data                                    0x20000064   Section       12  drehgeber.o(.data)
+    .data                                    0x20000070   Section       16  newtimer.o(.data)
+    .bss                                     0x20000080   Section      528  usart.o(.bss)
+    rbuf                                     0x20000080   Data         264  usart.o(.bss)
+    tbuf                                     0x20000188   Data         264  usart.o(.bss)
+    .bss                                     0x20000290   Section       60  output.o(.bss)
+    schritteString                           0x20000290   Data          20  output.o(.bss)
+    geschwWinkelString                       0x200002a4   Data          20  output.o(.bss)
+    winkelString                             0x200002b8   Data          20  output.o(.bss)
+    .bss                                     0x200002cc   Section       96  libspace.o(.bss)
+    HEAP                                     0x20000330   Section    32768  startup_stm32f4xx.o(HEAP)
+    Heap_Mem                                 0x20000330   Data       32768  startup_stm32f4xx.o(HEAP)
+    STACK                                    0x20008330   Section     4096  startup_stm32f4xx.o(STACK)
+    Stack_Mem                                0x20008330   Data        4096  startup_stm32f4xx.o(STACK)
+    __initial_sp                             0x20009330   Data           0  startup_stm32f4xx.o(STACK)
 
     Global Symbols
 
@@ -1252,49 +1245,46 @@ Image Symbol Table
     USART_Init                               0x08001571   Thumb Code   456  stm32f4xx_usart.o(i.USART_Init)
     USART_OverSampling8Cmd                   0x0800177d   Thumb Code    94  stm32f4xx_usart.o(i.USART_OverSampling8Cmd)
     _sys_exit                                0x0800181d   Thumb Code     4  retarget.o(i._sys_exit)
-    assert_failed                            0x08001821   Thumb Code     4  assert.o(i.assert_failed)
-    berechneWinkel                           0x08001825   Thumb Code    32  drehgeber.o(i.berechneWinkel)
-    drehungToLED                             0x08001851   Thumb Code    42  output.o(i.drehungToLED)
-    gespeicherteZeitAkt                      0x0800187d   Thumb Code    12  newtimer.o(i.gespeicherteZeitAkt)
-    getAnzahlSchritte                        0x0800188d   Thumb Code     6  drehgeber.o(i.getAnzahlSchritte)
-    getDrehrichtung                          0x08001899   Thumb Code   526  drehgeber.o(i.getDrehrichtung)
-    getTimeStamp                             0x08001aad   Thumb Code     8  timer.o(i.getTimeStamp)
-    intToBinary                              0x08001ab5   Thumb Code    42  output.o(i.intToBinary)
-    intToString                              0x08001ae5   Thumb Code   118  output.o(i.intToString)
-    isPressed                                0x08001b5d   Thumb Code    14  input.o(i.isPressed)
-    main                                     0x08001b71   Thumb Code   156  main.o(i.main)
-    readDrehgeber                            0x08001c0d   Thumb Code    76  input.o(i.readDrehgeber)
-    readGPIOPin                              0x08001c5d   Thumb Code    40  gpio.o(i.readGPIOPin)
-    resetGPIOPin                             0x08001c85   Thumb Code    26  gpio.o(i.resetGPIOPin)
-    resetLED                                 0x08001ca1   Thumb Code    14  output.o(i.resetLED)
-    setAnzahlSchritte                        0x08001cb5   Thumb Code     6  drehgeber.o(i.setAnzahlSchritte)
-    setGPIOPin                               0x08001cc1   Thumb Code    26  gpio.o(i.setGPIOPin)
-    setLED                                   0x08001cdd   Thumb Code    14  output.o(i.setLED)
-    stageLastSpeed                           0x08001cf1   Thumb Code    12  output.o(i.stageLastSpeed)
-    stageStepCounter                         0x08001d05   Thumb Code    12  output.o(i.stageStepCounter)
-    timerinit                                0x08001d19   Thumb Code    36  timer.o(i.timerinit)
-    writeNextBufferValue                     0x08001d41   Thumb Code   530  output.o(i.writeNextBufferValue)
-    zaehlerstandToLED                        0x08001f89   Thumb Code    54  output.o(i.zaehlerstandToLED)
-    zeitSchritt                              0x08001fc5   Thumb Code   108  newtimer.o(i.zeitSchritt)
-    _fp_init                                 0x08002041   Thumb Code    10  fpinit.o(x$fpl$fpinit)
-    __fplib_config_fpu_vfp                   0x08002049   Thumb Code     0  fpinit.o(x$fpl$fpinit)
-    __fplib_config_pureend_doubles           0x08002049   Thumb Code     0  fpinit.o(x$fpl$fpinit)
-    Region$$Table$$Base                      0x0800204c   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x0800206c   Number         0  anon$$obj.o(Region$$Table)
+    aktualisiereTFTAusgabe                   0x08001821   Thumb Code   530  output.o(i.aktualisiereTFTAusgabe)
+    aktualsiereWerte                         0x08001a69   Thumb Code    16  output.o(i.aktualsiereWerte)
+    assert_failed                            0x08001a85   Thumb Code     4  assert.o(i.assert_failed)
+    berechneWinkel                           0x08001a89   Thumb Code    32  drehgeber.o(i.berechneWinkel)
+    drehungToLED                             0x08001ab5   Thumb Code    42  output.o(i.drehungToLED)
+    gespeicherteZeitAkt                      0x08001ae1   Thumb Code    12  newtimer.o(i.gespeicherteZeitAkt)
+    getAnzahlSchritte                        0x08001af1   Thumb Code     6  drehgeber.o(i.getAnzahlSchritte)
+    getDrehrichtung                          0x08001afd   Thumb Code   462  drehgeber.o(i.getDrehrichtung)
+    getTimeStamp                             0x08001cd1   Thumb Code     8  timer.o(i.getTimeStamp)
+    intToBinary                              0x08001cd9   Thumb Code    42  output.o(i.intToBinary)
+    intToString                              0x08001d09   Thumb Code   118  output.o(i.intToString)
+    isPressed                                0x08001d81   Thumb Code    14  input.o(i.isPressed)
+    main                                     0x08001d95   Thumb Code   144  main.o(i.main)
+    readDrehgeber                            0x08001e25   Thumb Code    76  input.o(i.readDrehgeber)
+    readGPIOPin                              0x08001e75   Thumb Code    40  gpio.o(i.readGPIOPin)
+    resetGPIOPin                             0x08001e9d   Thumb Code    26  gpio.o(i.resetGPIOPin)
+    resetLED                                 0x08001eb9   Thumb Code    14  output.o(i.resetLED)
+    setAnzahlSchritte                        0x08001ecd   Thumb Code     6  drehgeber.o(i.setAnzahlSchritte)
+    setGPIOPin                               0x08001ed9   Thumb Code    26  gpio.o(i.setGPIOPin)
+    setLED                                   0x08001ef5   Thumb Code    14  output.o(i.setLED)
+    timerinit                                0x08001f09   Thumb Code    36  timer.o(i.timerinit)
+    zaehlerstandToLED                        0x08001f31   Thumb Code    54  output.o(i.zaehlerstandToLED)
+    zeitSchritt                              0x08001f6d   Thumb Code   108  newtimer.o(i.zeitSchritt)
+    _fp_init                                 0x08001fe9   Thumb Code    10  fpinit.o(x$fpl$fpinit)
+    __fplib_config_fpu_vfp                   0x08001ff1   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    __fplib_config_pureend_doubles           0x08001ff1   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    Region$$Table$$Base                      0x08001ff4   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08002014   Number         0  anon$$obj.o(Region$$Table)
     SystemCoreClock                          0x20000018   Data           4  system_stm32f4xx.o(.data)
     AHBPrescTable                            0x2000001c   Data          16  system_stm32f4xx.o(.data)
     binary                                   0x20000030   Data           8  output.o(.data)
     alterZaehlerstand                        0x20000038   Data           4  output.o(.data)
-    anzahlSchritte                           0x2000006c   Data           4  drehgeber.o(.data)
-    winkelInDezGrad                          0x20000070   Data           4  drehgeber.o(.data)
-    winkel                                   0x20000074   Data           4  drehgeber.o(.data)
-    winkelDif                                0x20000078   Data           4  drehgeber.o(.data)
-    alterWinkel                              0x2000007c   Data           4  drehgeber.o(.data)
-    startZeit                                0x20000080   Data           4  newtimer.o(.data)
-    counter                                  0x20000084   Data           4  newtimer.o(.data)
-    timeSum                                  0x20000088   Data           8  newtimer.o(.data)
-    __libspace_start                         0x200002dc   Data          96  libspace.o(.bss)
-    __temporary_stack_top$libspace           0x2000033c   Data           0  libspace.o(.bss)
+    anzahlSchritte                           0x20000064   Data           4  drehgeber.o(.data)
+    winkelInDezGrad                          0x20000068   Data           4  drehgeber.o(.data)
+    winkel                                   0x2000006c   Data           4  drehgeber.o(.data)
+    startZeit                                0x20000070   Data           4  newtimer.o(.data)
+    counter                                  0x20000074   Data           4  newtimer.o(.data)
+    timeSum                                  0x20000078   Data           8  newtimer.o(.data)
+    __libspace_start                         0x200002cc   Data          96  libspace.o(.bss)
+    __temporary_stack_top$libspace           0x2000032c   Data           0  libspace.o(.bss)
 
 
 
@@ -1304,69 +1294,69 @@ Memory Map of the image
 
   Image Entry point : 0x08000189
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x000020fc, Max: 0x00100000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00002094, Max: 0x00100000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x0000206c, Max: 0x00100000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00002014, Max: 0x00100000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x08000000   0x08000000   0x00000188   Data   RO         1493    RESET               startup_stm32f4xx.o
-    0x08000188   0x08000188   0x00000008   Code   RO         2027  * !!!main             c_w.l(__main.o)
-    0x08000190   0x08000190   0x00000034   Code   RO         2200    !!!scatter          c_w.l(__scatter.o)
-    0x080001c4   0x080001c4   0x0000001a   Code   RO         2202    !!handler_copy      c_w.l(__scatter_copy.o)
+    0x08000188   0x08000188   0x00000008   Code   RO         2015  * !!!main             c_w.l(__main.o)
+    0x08000190   0x08000190   0x00000034   Code   RO         2188    !!!scatter          c_w.l(__scatter.o)
+    0x080001c4   0x080001c4   0x0000001a   Code   RO         2190    !!handler_copy      c_w.l(__scatter_copy.o)
     0x080001de   0x080001de   0x00000002   PAD
-    0x080001e0   0x080001e0   0x0000001c   Code   RO         2204    !!handler_zi        c_w.l(__scatter_zi.o)
-    0x080001fc   0x080001fc   0x00000002   Code   RO         2075    .ARM.Collect$$libinit$$00000000  c_w.l(libinit.o)
-    0x080001fe   0x080001fe   0x00000004   Code   RO         2085    .ARM.Collect$$libinit$$00000001  c_w.l(libinit2.o)
-    0x08000202   0x08000202   0x00000000   Code   RO         2088    .ARM.Collect$$libinit$$00000004  c_w.l(libinit2.o)
-    0x08000202   0x08000202   0x00000000   Code   RO         2091    .ARM.Collect$$libinit$$0000000A  c_w.l(libinit2.o)
-    0x08000202   0x08000202   0x00000000   Code   RO         2093    .ARM.Collect$$libinit$$0000000C  c_w.l(libinit2.o)
-    0x08000202   0x08000202   0x00000000   Code   RO         2095    .ARM.Collect$$libinit$$0000000E  c_w.l(libinit2.o)
-    0x08000202   0x08000202   0x00000000   Code   RO         2098    .ARM.Collect$$libinit$$00000011  c_w.l(libinit2.o)
-    0x08000202   0x08000202   0x00000000   Code   RO         2100    .ARM.Collect$$libinit$$00000013  c_w.l(libinit2.o)
-    0x08000202   0x08000202   0x00000000   Code   RO         2102    .ARM.Collect$$libinit$$00000015  c_w.l(libinit2.o)
-    0x08000202   0x08000202   0x00000000   Code   RO         2104    .ARM.Collect$$libinit$$00000017  c_w.l(libinit2.o)
-    0x08000202   0x08000202   0x00000000   Code   RO         2106    .ARM.Collect$$libinit$$00000019  c_w.l(libinit2.o)
-    0x08000202   0x08000202   0x00000000   Code   RO         2108    .ARM.Collect$$libinit$$0000001B  c_w.l(libinit2.o)
-    0x08000202   0x08000202   0x00000000   Code   RO         2110    .ARM.Collect$$libinit$$0000001D  c_w.l(libinit2.o)
-    0x08000202   0x08000202   0x00000000   Code   RO         2112    .ARM.Collect$$libinit$$0000001F  c_w.l(libinit2.o)
-    0x08000202   0x08000202   0x00000000   Code   RO         2114    .ARM.Collect$$libinit$$00000021  c_w.l(libinit2.o)
-    0x08000202   0x08000202   0x00000000   Code   RO         2116    .ARM.Collect$$libinit$$00000023  c_w.l(libinit2.o)
-    0x08000202   0x08000202   0x00000000   Code   RO         2118    .ARM.Collect$$libinit$$00000025  c_w.l(libinit2.o)
-    0x08000202   0x08000202   0x00000000   Code   RO         2122    .ARM.Collect$$libinit$$0000002C  c_w.l(libinit2.o)
-    0x08000202   0x08000202   0x00000000   Code   RO         2124    .ARM.Collect$$libinit$$0000002E  c_w.l(libinit2.o)
-    0x08000202   0x08000202   0x00000000   Code   RO         2126    .ARM.Collect$$libinit$$00000030  c_w.l(libinit2.o)
-    0x08000202   0x08000202   0x00000000   Code   RO         2128    .ARM.Collect$$libinit$$00000032  c_w.l(libinit2.o)
-    0x08000202   0x08000202   0x00000002   Code   RO         2129    .ARM.Collect$$libinit$$00000033  c_w.l(libinit2.o)
-    0x08000204   0x08000204   0x00000002   Code   RO         2157    .ARM.Collect$$libshutdown$$00000000  c_w.l(libshutdown.o)
-    0x08000206   0x08000206   0x00000000   Code   RO         2167    .ARM.Collect$$libshutdown$$00000002  c_w.l(libshutdown2.o)
-    0x08000206   0x08000206   0x00000000   Code   RO         2169    .ARM.Collect$$libshutdown$$00000004  c_w.l(libshutdown2.o)
-    0x08000206   0x08000206   0x00000000   Code   RO         2172    .ARM.Collect$$libshutdown$$00000007  c_w.l(libshutdown2.o)
-    0x08000206   0x08000206   0x00000000   Code   RO         2175    .ARM.Collect$$libshutdown$$0000000A  c_w.l(libshutdown2.o)
-    0x08000206   0x08000206   0x00000000   Code   RO         2177    .ARM.Collect$$libshutdown$$0000000C  c_w.l(libshutdown2.o)
-    0x08000206   0x08000206   0x00000000   Code   RO         2180    .ARM.Collect$$libshutdown$$0000000F  c_w.l(libshutdown2.o)
-    0x08000206   0x08000206   0x00000002   Code   RO         2181    .ARM.Collect$$libshutdown$$00000010  c_w.l(libshutdown2.o)
-    0x08000208   0x08000208   0x00000000   Code   RO         2029    .ARM.Collect$$rtentry$$00000000  c_w.l(__rtentry.o)
-    0x08000208   0x08000208   0x00000000   Code   RO         2044    .ARM.Collect$$rtentry$$00000002  c_w.l(__rtentry2.o)
-    0x08000208   0x08000208   0x00000006   Code   RO         2056    .ARM.Collect$$rtentry$$00000004  c_w.l(__rtentry4.o)
-    0x0800020e   0x0800020e   0x00000000   Code   RO         2046    .ARM.Collect$$rtentry$$00000009  c_w.l(__rtentry2.o)
-    0x0800020e   0x0800020e   0x00000004   Code   RO         2047    .ARM.Collect$$rtentry$$0000000A  c_w.l(__rtentry2.o)
-    0x08000212   0x08000212   0x00000000   Code   RO         2049    .ARM.Collect$$rtentry$$0000000C  c_w.l(__rtentry2.o)
-    0x08000212   0x08000212   0x00000008   Code   RO         2050    .ARM.Collect$$rtentry$$0000000D  c_w.l(__rtentry2.o)
-    0x0800021a   0x0800021a   0x00000002   Code   RO         2079    .ARM.Collect$$rtexit$$00000000  c_w.l(rtexit.o)
-    0x0800021c   0x0800021c   0x00000000   Code   RO         2131    .ARM.Collect$$rtexit$$00000002  c_w.l(rtexit2.o)
-    0x0800021c   0x0800021c   0x00000004   Code   RO         2132    .ARM.Collect$$rtexit$$00000003  c_w.l(rtexit2.o)
-    0x08000220   0x08000220   0x00000006   Code   RO         2133    .ARM.Collect$$rtexit$$00000004  c_w.l(rtexit2.o)
+    0x080001e0   0x080001e0   0x0000001c   Code   RO         2192    !!handler_zi        c_w.l(__scatter_zi.o)
+    0x080001fc   0x080001fc   0x00000002   Code   RO         2063    .ARM.Collect$$libinit$$00000000  c_w.l(libinit.o)
+    0x080001fe   0x080001fe   0x00000004   Code   RO         2073    .ARM.Collect$$libinit$$00000001  c_w.l(libinit2.o)
+    0x08000202   0x08000202   0x00000000   Code   RO         2076    .ARM.Collect$$libinit$$00000004  c_w.l(libinit2.o)
+    0x08000202   0x08000202   0x00000000   Code   RO         2079    .ARM.Collect$$libinit$$0000000A  c_w.l(libinit2.o)
+    0x08000202   0x08000202   0x00000000   Code   RO         2081    .ARM.Collect$$libinit$$0000000C  c_w.l(libinit2.o)
+    0x08000202   0x08000202   0x00000000   Code   RO         2083    .ARM.Collect$$libinit$$0000000E  c_w.l(libinit2.o)
+    0x08000202   0x08000202   0x00000000   Code   RO         2086    .ARM.Collect$$libinit$$00000011  c_w.l(libinit2.o)
+    0x08000202   0x08000202   0x00000000   Code   RO         2088    .ARM.Collect$$libinit$$00000013  c_w.l(libinit2.o)
+    0x08000202   0x08000202   0x00000000   Code   RO         2090    .ARM.Collect$$libinit$$00000015  c_w.l(libinit2.o)
+    0x08000202   0x08000202   0x00000000   Code   RO         2092    .ARM.Collect$$libinit$$00000017  c_w.l(libinit2.o)
+    0x08000202   0x08000202   0x00000000   Code   RO         2094    .ARM.Collect$$libinit$$00000019  c_w.l(libinit2.o)
+    0x08000202   0x08000202   0x00000000   Code   RO         2096    .ARM.Collect$$libinit$$0000001B  c_w.l(libinit2.o)
+    0x08000202   0x08000202   0x00000000   Code   RO         2098    .ARM.Collect$$libinit$$0000001D  c_w.l(libinit2.o)
+    0x08000202   0x08000202   0x00000000   Code   RO         2100    .ARM.Collect$$libinit$$0000001F  c_w.l(libinit2.o)
+    0x08000202   0x08000202   0x00000000   Code   RO         2102    .ARM.Collect$$libinit$$00000021  c_w.l(libinit2.o)
+    0x08000202   0x08000202   0x00000000   Code   RO         2104    .ARM.Collect$$libinit$$00000023  c_w.l(libinit2.o)
+    0x08000202   0x08000202   0x00000000   Code   RO         2106    .ARM.Collect$$libinit$$00000025  c_w.l(libinit2.o)
+    0x08000202   0x08000202   0x00000000   Code   RO         2110    .ARM.Collect$$libinit$$0000002C  c_w.l(libinit2.o)
+    0x08000202   0x08000202   0x00000000   Code   RO         2112    .ARM.Collect$$libinit$$0000002E  c_w.l(libinit2.o)
+    0x08000202   0x08000202   0x00000000   Code   RO         2114    .ARM.Collect$$libinit$$00000030  c_w.l(libinit2.o)
+    0x08000202   0x08000202   0x00000000   Code   RO         2116    .ARM.Collect$$libinit$$00000032  c_w.l(libinit2.o)
+    0x08000202   0x08000202   0x00000002   Code   RO         2117    .ARM.Collect$$libinit$$00000033  c_w.l(libinit2.o)
+    0x08000204   0x08000204   0x00000002   Code   RO         2145    .ARM.Collect$$libshutdown$$00000000  c_w.l(libshutdown.o)
+    0x08000206   0x08000206   0x00000000   Code   RO         2155    .ARM.Collect$$libshutdown$$00000002  c_w.l(libshutdown2.o)
+    0x08000206   0x08000206   0x00000000   Code   RO         2157    .ARM.Collect$$libshutdown$$00000004  c_w.l(libshutdown2.o)
+    0x08000206   0x08000206   0x00000000   Code   RO         2160    .ARM.Collect$$libshutdown$$00000007  c_w.l(libshutdown2.o)
+    0x08000206   0x08000206   0x00000000   Code   RO         2163    .ARM.Collect$$libshutdown$$0000000A  c_w.l(libshutdown2.o)
+    0x08000206   0x08000206   0x00000000   Code   RO         2165    .ARM.Collect$$libshutdown$$0000000C  c_w.l(libshutdown2.o)
+    0x08000206   0x08000206   0x00000000   Code   RO         2168    .ARM.Collect$$libshutdown$$0000000F  c_w.l(libshutdown2.o)
+    0x08000206   0x08000206   0x00000002   Code   RO         2169    .ARM.Collect$$libshutdown$$00000010  c_w.l(libshutdown2.o)
+    0x08000208   0x08000208   0x00000000   Code   RO         2017    .ARM.Collect$$rtentry$$00000000  c_w.l(__rtentry.o)
+    0x08000208   0x08000208   0x00000000   Code   RO         2032    .ARM.Collect$$rtentry$$00000002  c_w.l(__rtentry2.o)
+    0x08000208   0x08000208   0x00000006   Code   RO         2044    .ARM.Collect$$rtentry$$00000004  c_w.l(__rtentry4.o)
+    0x0800020e   0x0800020e   0x00000000   Code   RO         2034    .ARM.Collect$$rtentry$$00000009  c_w.l(__rtentry2.o)
+    0x0800020e   0x0800020e   0x00000004   Code   RO         2035    .ARM.Collect$$rtentry$$0000000A  c_w.l(__rtentry2.o)
+    0x08000212   0x08000212   0x00000000   Code   RO         2037    .ARM.Collect$$rtentry$$0000000C  c_w.l(__rtentry2.o)
+    0x08000212   0x08000212   0x00000008   Code   RO         2038    .ARM.Collect$$rtentry$$0000000D  c_w.l(__rtentry2.o)
+    0x0800021a   0x0800021a   0x00000002   Code   RO         2067    .ARM.Collect$$rtexit$$00000000  c_w.l(rtexit.o)
+    0x0800021c   0x0800021c   0x00000000   Code   RO         2119    .ARM.Collect$$rtexit$$00000002  c_w.l(rtexit2.o)
+    0x0800021c   0x0800021c   0x00000004   Code   RO         2120    .ARM.Collect$$rtexit$$00000003  c_w.l(rtexit2.o)
+    0x08000220   0x08000220   0x00000006   Code   RO         2121    .ARM.Collect$$rtexit$$00000004  c_w.l(rtexit2.o)
     0x08000226   0x08000226   0x00000002   PAD
     0x08000228   0x08000228   0x00000050   Code   RO         1494    .text               startup_stm32f4xx.o
-    0x08000278   0x08000278   0x00000048   Code   RO         1959    .text               c_w.l(llsdiv.o)
-    0x080002c0   0x080002c0   0x0000003e   Code   RO         2019    .text               c_w.l(strlen.o)
-    0x080002fe   0x080002fe   0x00000006   Code   RO         2025    .text               c_w.l(heapauxi.o)
-    0x08000304   0x08000304   0x000000ee   Code   RO         2030    .text               c_w.l(lludivv7m.o)
-    0x080003f2   0x080003f2   0x0000004a   Code   RO         2064    .text               c_w.l(sys_stackheap_outer.o)
-    0x0800043c   0x0800043c   0x00000012   Code   RO         2068    .text               c_w.l(exit.o)
+    0x08000278   0x08000278   0x00000048   Code   RO         1947    .text               c_w.l(llsdiv.o)
+    0x080002c0   0x080002c0   0x0000003e   Code   RO         2007    .text               c_w.l(strlen.o)
+    0x080002fe   0x080002fe   0x00000006   Code   RO         2013    .text               c_w.l(heapauxi.o)
+    0x08000304   0x08000304   0x000000ee   Code   RO         2018    .text               c_w.l(lludivv7m.o)
+    0x080003f2   0x080003f2   0x0000004a   Code   RO         2052    .text               c_w.l(sys_stackheap_outer.o)
+    0x0800043c   0x0800043c   0x00000012   Code   RO         2056    .text               c_w.l(exit.o)
     0x0800044e   0x0800044e   0x00000002   PAD
-    0x08000450   0x08000450   0x00000008   Code   RO         2076    .text               c_w.l(libspace.o)
+    0x08000450   0x08000450   0x00000008   Code   RO         2064    .text               c_w.l(libspace.o)
     0x08000458   0x08000458   0x00000018   Code   RO          442    i.Delay             ti_lib.o
     0x08000470   0x08000470   0x000001a4   Code   RO         1393    i.GPIO_Init         stm32f4xx_gpio.o
     0x08000614   0x08000614   0x000001a0   Code   RO         1394    i.GPIO_PinAFConfig  stm32f4xx_gpio.o
@@ -1404,57 +1394,56 @@ Memory Map of the image
     0x08001570   0x08001570   0x0000020c   Code   RO          932    i.USART_Init        stm32f4xx_usart.o
     0x0800177c   0x0800177c   0x000000a0   Code   RO          938    i.USART_OverSampling8Cmd  stm32f4xx_usart.o
     0x0800181c   0x0800181c   0x00000004   Code   RO         1538    i._sys_exit         retarget.o
-    0x08001820   0x08001820   0x00000004   Code   RO            1    i.assert_failed     assert.o
-    0x08001824   0x08001824   0x0000002c   Code   RO         1903    i.berechneWinkel    drehgeber.o
-    0x08001850   0x08001850   0x0000002a   Code   RO         1822    i.drehungToLED      output.o
-    0x0800187a   0x0800187a   0x00000002   PAD
-    0x0800187c   0x0800187c   0x00000010   Code   RO         1936    i.gespeicherteZeitAkt  newtimer.o
-    0x0800188c   0x0800188c   0x0000000c   Code   RO         1904    i.getAnzahlSchritte  drehgeber.o
-    0x08001898   0x08001898   0x00000214   Code   RO         1905    i.getDrehrichtung   drehgeber.o
-    0x08001aac   0x08001aac   0x00000008   Code   RO          413    i.getTimeStamp      timer.o
-    0x08001ab4   0x08001ab4   0x00000030   Code   RO         1823    i.intToBinary       output.o
-    0x08001ae4   0x08001ae4   0x00000076   Code   RO         1824    i.intToString       output.o
-    0x08001b5a   0x08001b5a   0x00000002   PAD
-    0x08001b5c   0x08001b5c   0x00000014   Code   RO         1789    i.isPressed         input.o
-    0x08001b70   0x08001b70   0x0000009c   Code   RO         1718    i.main              main.o
-    0x08001c0c   0x08001c0c   0x00000050   Code   RO         1790    i.readDrehgeber     input.o
-    0x08001c5c   0x08001c5c   0x00000028   Code   RO         1757    i.readGPIOPin       gpio.o
-    0x08001c84   0x08001c84   0x0000001a   Code   RO         1758    i.resetGPIOPin      gpio.o
-    0x08001c9e   0x08001c9e   0x00000002   PAD
-    0x08001ca0   0x08001ca0   0x00000014   Code   RO         1825    i.resetLED          output.o
-    0x08001cb4   0x08001cb4   0x0000000c   Code   RO         1906    i.setAnzahlSchritte  drehgeber.o
-    0x08001cc0   0x08001cc0   0x0000001a   Code   RO         1759    i.setGPIOPin        gpio.o
-    0x08001cda   0x08001cda   0x00000002   PAD
-    0x08001cdc   0x08001cdc   0x00000014   Code   RO         1826    i.setLED            output.o
-    0x08001cf0   0x08001cf0   0x00000014   Code   RO         1827    i.stageLastSpeed    output.o
-    0x08001d04   0x08001d04   0x00000014   Code   RO         1829    i.stageStepCounter  output.o
-    0x08001d18   0x08001d18   0x00000028   Code   RO          414    i.timerinit         timer.o
-    0x08001d40   0x08001d40   0x00000248   Code   RO         1830    i.writeNextBufferValue  output.o
-    0x08001f88   0x08001f88   0x0000003c   Code   RO         1831    i.zaehlerstandToLED  output.o
-    0x08001fc4   0x08001fc4   0x0000007c   Code   RO         1937    i.zeitSchritt       newtimer.o
-    0x08002040   0x08002040   0x0000000a   Code   RO         2145    x$fpl$fpinit        fz_wm.l(fpinit.o)
-    0x0800204a   0x0800204a   0x00000002   PAD
-    0x0800204c   0x0800204c   0x00000020   Data   RO         2198    Region$$Table       anon$$obj.o
+    0x08001820   0x08001820   0x00000248   Code   RO         1822    i.aktualisiereTFTAusgabe  output.o
+    0x08001a68   0x08001a68   0x0000001c   Code   RO         1823    i.aktualsiereWerte  output.o
+    0x08001a84   0x08001a84   0x00000004   Code   RO            1    i.assert_failed     assert.o
+    0x08001a88   0x08001a88   0x0000002c   Code   RO         1891    i.berechneWinkel    drehgeber.o
+    0x08001ab4   0x08001ab4   0x0000002a   Code   RO         1824    i.drehungToLED      output.o
+    0x08001ade   0x08001ade   0x00000002   PAD
+    0x08001ae0   0x08001ae0   0x00000010   Code   RO         1924    i.gespeicherteZeitAkt  newtimer.o
+    0x08001af0   0x08001af0   0x0000000c   Code   RO         1892    i.getAnzahlSchritte  drehgeber.o
+    0x08001afc   0x08001afc   0x000001d4   Code   RO         1893    i.getDrehrichtung   drehgeber.o
+    0x08001cd0   0x08001cd0   0x00000008   Code   RO          413    i.getTimeStamp      timer.o
+    0x08001cd8   0x08001cd8   0x00000030   Code   RO         1825    i.intToBinary       output.o
+    0x08001d08   0x08001d08   0x00000076   Code   RO         1826    i.intToString       output.o
+    0x08001d7e   0x08001d7e   0x00000002   PAD
+    0x08001d80   0x08001d80   0x00000014   Code   RO         1789    i.isPressed         input.o
+    0x08001d94   0x08001d94   0x00000090   Code   RO         1718    i.main              main.o
+    0x08001e24   0x08001e24   0x00000050   Code   RO         1790    i.readDrehgeber     input.o
+    0x08001e74   0x08001e74   0x00000028   Code   RO         1757    i.readGPIOPin       gpio.o
+    0x08001e9c   0x08001e9c   0x0000001a   Code   RO         1758    i.resetGPIOPin      gpio.o
+    0x08001eb6   0x08001eb6   0x00000002   PAD
+    0x08001eb8   0x08001eb8   0x00000014   Code   RO         1827    i.resetLED          output.o
+    0x08001ecc   0x08001ecc   0x0000000c   Code   RO         1894    i.setAnzahlSchritte  drehgeber.o
+    0x08001ed8   0x08001ed8   0x0000001a   Code   RO         1759    i.setGPIOPin        gpio.o
+    0x08001ef2   0x08001ef2   0x00000002   PAD
+    0x08001ef4   0x08001ef4   0x00000014   Code   RO         1828    i.setLED            output.o
+    0x08001f08   0x08001f08   0x00000028   Code   RO          414    i.timerinit         timer.o
+    0x08001f30   0x08001f30   0x0000003c   Code   RO         1829    i.zaehlerstandToLED  output.o
+    0x08001f6c   0x08001f6c   0x0000007c   Code   RO         1925    i.zeitSchritt       newtimer.o
+    0x08001fe8   0x08001fe8   0x0000000a   Code   RO         2133    x$fpl$fpinit        fz_wm.l(fpinit.o)
+    0x08001ff2   0x08001ff2   0x00000002   PAD
+    0x08001ff4   0x08001ff4   0x00000020   Data   RO         2186    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x0800206c, Size: 0x00009340, Max: 0x00020000, ABSOLUTE)
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08002014, Size: 0x00009330, Max: 0x00020000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x0800206c   0x00000008   Data   RW          447    .data               ti_lib.o
-    0x20000008   0x08002074   0x00000010   Data   RW         1156    .data               stm32f4xx_rcc.o
-    0x20000018   0x08002084   0x00000014   Data   RW         1503    .data               system_stm32f4xx.o
-    0x2000002c   0x08002098   0x00000004   Data   RW         1606    .data               usart.o
-    0x20000030   0x0800209c   0x00000039   Data   RW         1833    .data               output.o
-    0x20000069   0x080020d5   0x00000003   PAD
-    0x2000006c   0x080020d8   0x00000014   Data   RW         1907    .data               drehgeber.o
-    0x20000080   0x080020ec   0x00000010   Data   RW         1938    .data               newtimer.o
-    0x20000090        -       0x00000210   Zero   RW         1605    .bss                usart.o
-    0x200002a0        -       0x0000003c   Zero   RW         1832    .bss                output.o
-    0x200002dc        -       0x00000060   Zero   RW         2077    .bss                c_w.l(libspace.o)
-    0x2000033c   0x080020fc   0x00000004   PAD
-    0x20000340        -       0x00008000   Zero   RW         1492    HEAP                startup_stm32f4xx.o
-    0x20008340        -       0x00001000   Zero   RW         1491    STACK               startup_stm32f4xx.o
+    0x20000000   0x08002014   0x00000008   Data   RW          447    .data               ti_lib.o
+    0x20000008   0x0800201c   0x00000010   Data   RW         1156    .data               stm32f4xx_rcc.o
+    0x20000018   0x0800202c   0x00000014   Data   RW         1503    .data               system_stm32f4xx.o
+    0x2000002c   0x08002040   0x00000004   Data   RW         1606    .data               usart.o
+    0x20000030   0x08002044   0x00000031   Data   RW         1831    .data               output.o
+    0x20000061   0x08002075   0x00000003   PAD
+    0x20000064   0x08002078   0x0000000c   Data   RW         1895    .data               drehgeber.o
+    0x20000070   0x08002084   0x00000010   Data   RW         1926    .data               newtimer.o
+    0x20000080        -       0x00000210   Zero   RW         1605    .bss                usart.o
+    0x20000290        -       0x0000003c   Zero   RW         1830    .bss                output.o
+    0x200002cc        -       0x00000060   Zero   RW         2065    .bss                c_w.l(libspace.o)
+    0x2000032c   0x08002094   0x00000004   PAD
+    0x20000330        -       0x00008000   Zero   RW         1492    HEAP                startup_stm32f4xx.o
+    0x20008330        -       0x00001000   Zero   RW         1491    STACK               startup_stm32f4xx.o
 
 
 ==============================================================================
@@ -1465,13 +1454,13 @@ Image component sizes
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
          4          0          0          0          0       5240   assert.o
-       600         30          0         20          0       2733   drehgeber.o
+       536         30          0         12          0       2623   drehgeber.o
         92          0          0          0          0       1922   gpio.o
        100         10          0          0          0       1172   input.o
-       156          0          0          0          0        675   main.o
+       144          0          0          0          0        667   main.o
        304         86          0          0          0     210687   misc.o
-       140         20          0         16          0       1392   newtimer.o
-      1096        166          0         57         60       7063   output.o
+       140         20          0         16          0       1400   newtimer.o
+      1084        162          0         49         60       6576   output.o
          4          0          0          0          0        468   retarget.o
         80         32        392          0      36864        852   startup_stm32f4xx.o
          0          0          0          0          0      12832   stm32f4xx_dma.o
@@ -1486,7 +1475,7 @@ Image component sizes
        396         38          0          4        528       4871   usart.o
 
     ----------------------------------------------------------------------
-      7224        988        424        144      37452     524284   Object Totals
+      7136        984        424        128      37452     523687   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         14          0          0          3          0          0   (incl. Padding)
 
@@ -1537,15 +1526,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      7876       1000        424        144      37552     519692   Grand Totals
-      7876       1000        424        144      37552     519692   ELF Image Totals
-      7876       1000        424        144          0          0   ROM Totals
+      7788        996        424        128      37552     519195   Grand Totals
+      7788        996        424        128      37552     519195   ELF Image Totals
+      7788        996        424        128          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 8300 (   8.11kB)
-    Total RW  Size (RW Data + ZI Data)             37696 (  36.81kB)
-    Total ROM Size (Code + RO Data + RW Data)       8444 (   8.25kB)
+    Total RO  Size (Code + RO Data)                 8212 (   8.02kB)
+    Total RW  Size (RW Data + ZI Data)             37680 (  36.80kB)
+    Total ROM Size (Code + RO Data + RW Data)       8340 (   8.14kB)
 
 ==============================================================================
 

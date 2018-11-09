@@ -227,7 +227,7 @@ F (.\TI_BRD_LIB\Simulation\oneWireSTIM.ini)(0x5BE572F6)()
 F (.\TI_BRD_LIB\Simulation\rotarySIM.ini)(0x5BE572F6)()
 F (.\TI_BRD_LIB\Simulation\timer2SIM.ini)(0x5BE572F6)()
 F (.\TI_BRD_LIB\Simulation\userSIM.ini)(0x5BE572F6)()
-F (.\main.c)(0x5BE5AC49)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I TI_BRD_LIB\Library -I .\TI_BRD_LIB\TI-C_Board-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\ST\STM32F4xx-D__UVISION_VERSION="525" -DSTM32F40_41xxx-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (.\main.c)(0x5BE5BA4C)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I TI_BRD_LIB\Library -I .\TI_BRD_LIB\TI-C_Board-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\ST\STM32F4xx-D__UVISION_VERSION="525" -DSTM32F40_41xxx-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599F218C)
 I (TI_BRD_LIB\Library\TI_Lib.h)(0x5BE572F5)
 I (TI_BRD_LIB\Library\TI_memory_map.h)(0x5BE572F5)
@@ -248,7 +248,7 @@ I (TI_BRD_LIB\Library\tft.h)(0x5BE572F5)
 I (gpio.h)(0x5BE572F6)
 I (general.h)(0x5BE572F6)
 I (input.h)(0x5BE572F6)
-I (output.h)(0x5BE59933)
+I (output.h)(0x5BE5BBED)
 I (drehgeber.h)(0x5BE572F6)
 I (newTimer.h)(0x5BE5A383)
 I (TI_BRD_LIB\Library\timer.h)(0x5BE572F5)
@@ -275,11 +275,11 @@ I (C:\Keil_v5\ARM\CMSIS\Include\core_cmInstr.h)(0x559D3FFA)
 I (C:\Keil_v5\ARM\CMSIS\Include\core_cmFunc.h)(0x559D3FFA)
 I (C:\Keil_v5\ARM\CMSIS\Include\core_cm4_simd.h)(0x559D3FFA)
 I (C:\Keil_v5\ARM\INC\ST\STM32F4xx\system_stm32f4xx.h)(0x559D3550)
-F (.\output.c)(0x5BE5A944)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I TI_BRD_LIB\Library -I .\TI_BRD_LIB\TI-C_Board-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\ST\STM32F4xx-D__UVISION_VERSION="525" -DSTM32F40_41xxx-o .\objects\output.o --omf_browse .\objects\output.crf --depend .\objects\output.d)
+F (.\output.c)(0x5BE5BF84)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I TI_BRD_LIB\Library -I .\TI_BRD_LIB\TI-C_Board-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\ST\STM32F4xx-D__UVISION_VERSION="525" -DSTM32F40_41xxx-o .\objects\output.o --omf_browse .\objects\output.crf --depend .\objects\output.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599F218C)
 I (general.h)(0x5BE572F6)
 I (input.h)(0x5BE572F6)
-I (output.h)(0x5BE59933)
+I (output.h)(0x5BE5BBED)
 I (gpio.h)(0x5BE572F6)
 I (TI_BRD_LIB\Library\TI_memory_map.h)(0x5BE572F5)
 I (.\TI_BRD_LIB\TI-C_Board\stm32f4xx.h)(0x5BE572F6)
@@ -291,11 +291,11 @@ I (C:\Keil_v5\ARM\CMSIS\Include\core_cm4_simd.h)(0x559D3FFA)
 I (C:\Keil_v5\ARM\INC\ST\STM32F4xx\system_stm32f4xx.h)(0x559D3550)
 I (TI_BRD_LIB\Library\tft.h)(0x5BE572F5)
 I (drehgeber.h)(0x5BE572F6)
-F (.\drehgeber.c)(0x5BE5A779)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I TI_BRD_LIB\Library -I .\TI_BRD_LIB\TI-C_Board-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\ST\STM32F4xx-D__UVISION_VERSION="525" -DSTM32F40_41xxx-o .\objects\drehgeber.o --omf_browse .\objects\drehgeber.crf --depend .\objects\drehgeber.d)
+F (.\drehgeber.c)(0x5BE5BC5C)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I TI_BRD_LIB\Library -I .\TI_BRD_LIB\TI-C_Board-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\ST\STM32F4xx-D__UVISION_VERSION="525" -DSTM32F40_41xxx-o .\objects\drehgeber.o --omf_browse .\objects\drehgeber.crf --depend .\objects\drehgeber.d)
 I (general.h)(0x5BE572F6)
 I (newTimer.h)(0x5BE5A383)
-I (output.h)(0x5BE59933)
-F (.\newTimer.c)(0x5BE5A7C6)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I TI_BRD_LIB\Library -I .\TI_BRD_LIB\TI-C_Board-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\ST\STM32F4xx-D__UVISION_VERSION="525" -DSTM32F40_41xxx-o .\objects\newtimer.o --omf_browse .\objects\newtimer.crf --depend .\objects\newtimer.d)
+I (output.h)(0x5BE5BBED)
+F (.\newTimer.c)(0x5BE5BED2)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I TI_BRD_LIB\Library -I .\TI_BRD_LIB\TI-C_Board-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\ST\STM32F4xx-D__UVISION_VERSION="525" -DSTM32F40_41xxx-o .\objects\newtimer.o --omf_browse .\objects\newtimer.crf --depend .\objects\newtimer.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599F218C)
 I (newTimer.h)(0x5BE5A383)
 I (TI_BRD_LIB\Library\timer.h)(0x5BE572F5)
@@ -307,6 +307,6 @@ F (.\TI_BRD_LIB\Library\timer.h)(0x5BE572F5)()
 F (.\general.h)(0x5BE572F6)()
 F (.\gpio.h)(0x5BE572F6)()
 F (.\input.h)(0x5BE572F6)()
-F (.\output.h)(0x5BE59933)()
+F (.\output.h)(0x5BE5BBED)()
 F (.\drehgeber.h)(0x5BE572F6)()
 F (.\newTimer.h)(0x5BE5A383)()

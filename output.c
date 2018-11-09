@@ -21,13 +21,12 @@ char binary[8];
 int alterZaehlerstand;
 
 //---------------- VALUE -----------------
-static int stagedRotMode = 0;
-static int stagedStepCounter = 0;
+// static int stagedStepCounter = 0;
 static int stagedSpeed = 0;
 //-------------------------------------------
 
-static int newStepValue = 1 ;
-static int newDegValue = 1 ;
+static int SchritteHatNeuenWert = 1 ;
+static int WinkelHatNeuenWert = 1 ;
 //--------------- STRINGS + INDEX ----------
 
 static char schritteString[INT_TO_STRING_LENGTH];
@@ -42,9 +41,9 @@ static char winkelString[INT_TO_STRING_LENGTH];
 static int winkelIndex = 0;
 static int winkelLastIndex =0;
 
-typedef enum {step, degTime, deg} Line; 
+typedef enum {schritte, geschwWinkel, winkel} Status; 
 
-static Line LineCounter = step;	
+static Status currentStatus = schritte;	
 
 
 /**
@@ -55,39 +54,6 @@ static Line LineCounter = step;
 *
 * @return void
 ********************************************************************/
-
-void stageRotationMode(int rotMode){	
-	stagedRotMode = rotMode;	
-}
-
-
-/**
-*********************************************************************
-* @brief Ldt den Stepcounter in den Zwischenspeicher
-*
-* @param int Anzahl der Schritte
-*
-* @return void
-********************************************************************/
-void stageStepCounter(int AnzahlSchritte){
-	newStepValue = 1;
-	stagedStepCounter = AnzahlSchritte;
-}
-
-
-/**
-*********************************************************************
-* @brief Ldt die Letzte gemessene Geschwindikeit in den Zwischenspeicher
-*
-* @param int letzte gemessene Geschwindigkeit
-*
-* @return void
-********************************************************************/
-void stageLastSpeed(int steps_per_s){	//Schritte pro S
-	newDegValue = 1;
-	stagedSpeed = steps_per_s;
-}
-
 void Init_Output(void) {
 	TFT_cls();
 	
@@ -111,6 +77,22 @@ void Init_Output(void) {
 	winkelString[1] = '\0';
 
 }
+
+
+/**
+*********************************************************************
+* @brief Ldt die Letzte gemessene Geschwindikeit in den Zwischenspeicher
+*
+* @param int letzte gemessene Geschwindigkeit
+*
+* @return void
+********************************************************************/
+void aktualsiereWerte(int schritteProSekunde){	//Schritte pro S
+	SchritteHatNeuenWert = 1;
+	WinkelHatNeuenWert = 1;
+	stagedSpeed = schritteProSekunde;
+}
+
 
 void setLED(int led) {
 	setGPIOPin(LED_PORT, led);
@@ -168,30 +150,24 @@ int zaehlerstandToLED(int zaehlerstand) {
 }
 
 
-void writeNextBufferValue(void){
+void aktualisiereTFTAusgabe(void){
 	
-	switch(LineCounter){		
-		case step:		//---------------------- SCHRITT ANZEIGE ------------------------------
+	switch(currentStatus){		
+		case schritte:		//---------------------- SCHRITT ANZEIGE ------------------------------
 			if(schritteString[schritteIndex] == '\0' && (schritteIndex >= schritteLastIndex)){				
-				if(newStepValue){
-					int steps = getAnzahlSchritte();
-					intToString(steps, schritteString);				
+				if(SchritteHatNeuenWert){
+					int schritte = getAnzahlSchritte();
+					intToString(schritte, schritteString);				
 					schritteLastIndex = schritteIndex;
 					schritteIndex = 0;
-					newStepValue = 0;
+					SchritteHatNeuenWert = 0;
 				}
 			}else if(schritteString[schritteIndex] == '\0' && (schritteIndex < schritteLastIndex)){
-
-				// Set LED an
-				//setOut(1,1);
 				
 				TFT_gotoxy(schritteLastIndex+23, Y_Schritte);
 				TFT_putc(' ');
 				schritteLastIndex--;				
-			}else{
-
-				// Set LED an
-				//setOut(1,1);				
+			}else{		
 				
 				TFT_gotoxy(schritteIndex+24, Y_Schritte);
 				TFT_putc(schritteString[schritteIndex]);
@@ -199,10 +175,9 @@ void writeNextBufferValue(void){
 			}			
 			break;
 			
-		case degTime: 		//-------------- WINKEL GESCHWINDIGKEIT ANZEIGE -----------------------
+		case geschwWinkel: 		//-------------- WINKEL GESCHWINDIGKEIT ANZEIGE -----------------------
 			if(geschwWinkelString[geschwWinkelIndex] == '\0' && (geschwWinkelIndex >= geschwWinkelLastIndex)){
-				if(newDegValue){
-				//int winkelGeschwin = stagedSpeed;
+				if(WinkelHatNeuenWert){
 				int winkelGeschwin = ((stagedSpeed * 360)) / (PULSES_PER_ROTATION);	//Umrechnung der Schritte pro Sekunde in Grad pro sekunde			<--------- TODO Rechnung checken
 				
 				// Ergebnis Runden				
@@ -216,16 +191,11 @@ void writeNextBufferValue(void){
 				}	
 			}else if(geschwWinkelString[geschwWinkelIndex] == '\0' && (geschwWinkelIndex < geschwWinkelLastIndex)){
 				
-				// Set LED an
-				//setOut(1,1);
-				
 				TFT_gotoxy(geschwWinkelLastIndex+23, Y_GeschWinkel);
 				TFT_putc(' ');
-				geschwWinkelLastIndex--;				
+				geschwWinkelLastIndex--;			
+				
 			}else{		
-
-				// Set LED an
-				//setOut(1,1);
 				
 				TFT_gotoxy(geschwWinkelIndex+24,Y_GeschWinkel );
 				TFT_putc(geschwWinkelString[geschwWinkelIndex]);
@@ -233,31 +203,25 @@ void writeNextBufferValue(void){
 			}					
 			break;
 			
-		case deg:		// --------------   WINKEL ANZEIGE ---------------
+		case winkel:		// --------------   WINKEL ANZEIGE ---------------
 			if(winkelString[winkelIndex] == '\0' && (winkelIndex >= winkelLastIndex)){
-				if(newDegValue){
+				if(WinkelHatNeuenWert){
 				int winkel = berechneWinkel();
-	
-				
+			
 				intToString(winkel, winkelString);				
-
 
 				winkelLastIndex = winkelIndex;
 				winkelIndex = 0;
-				newDegValue = 0;
+				WinkelHatNeuenWert = 0;
 				}
+				
 			}else if(winkelString[winkelIndex] == '\0' && (winkelIndex < winkelLastIndex)){
-				
-				// Set LED an
-				//setOut(1,1);
-				
+		
 				TFT_gotoxy(winkelLastIndex+23, Y_Winkel);
 				TFT_putc(' ');
-				winkelLastIndex--;				
+				winkelLastIndex--;		
+				
 			}else{	
-
-				// Set LED an
-			//	setOut(1,1);
 				
 				TFT_gotoxy(winkelIndex+24, Y_Winkel);
 				TFT_putc(winkelString[winkelIndex]);
@@ -267,15 +231,11 @@ void writeNextBufferValue(void){
 			
 	
 	}
-
-
-//	setOut(1, 0);	// Kontroll LED wieder ausschalten
-	
 		//Aktualisieren des Line Counters
-	if(LineCounter == deg){
-		LineCounter = step;
+	if(currentStatus == winkel){
+		currentStatus = schritte;
 	}else{
-		LineCounter++;
+		currentStatus++;
 	}
 }
 

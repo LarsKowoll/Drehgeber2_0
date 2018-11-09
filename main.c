@@ -42,12 +42,11 @@
   * @param  None
   */
 int main(void) {
-	// Initialisation
+	//------------------------------------------Initialisation------------------------------------------
 	Init_TI_Board(); // Initialisation of Port E and G
 	Init_Output();
 	timerinit();
 
-	
 	int zustand = PHASE_A;
 	int alterZustand = PHASE_A;
 	int drehung = NO_CHANGE;
@@ -60,51 +59,47 @@ int main(void) {
 	
 	while (1) { // super loop
 		
-		/* Einlesen */
+		//-----------------------------------------Einlesen------------------------------------------------
 		
 		e = readDrehgeber(&zustand); // Zustand einlesen
 		taste_S6 = isPressed(TASTE_S6); // = 1, wenn Taste gedrückt ist
 		taste_S7 = isPressed(TASTE_S7); // = 1, wenn Taste gedrückt ist
 		
-		/* Update */
-	  
+		//--------------------------------------Ausgabe berechnen-------------------------------------------
 		
-		
-		
-		/* Ausgabe berechnen */
 		e_phase = getDrehrichtung(&zustand, &alterZustand, &drehung);
 		
-		
-		
-		/* Ausgabe */
+		//-------------------------------------------Ausgabe------------------------------------------------
 		
 		// LEDs
-		drehungToLED(drehung);
-		zaehlerstandToLED(getAnzahlSchritte());
-
-		if (e_phase == PHASE_ERROR) {
-			setLED(LED_D18);
-		}
 		
-		// TFT
-//		zaehlerstandToTFT(getAnzahlSchritte());
-//		winkelToTFT();
-//		winkelGeschwindigkeitToTFT();
-		writeNextBufferValue();
+		drehungToLED(drehung);
+		zaehlerstandToLED(getAnzahlSchritte());	
+		
+		//TFT
+		
+		aktualisiereTFTAusgabe();
 		
 		// Tasten
+		
+		if (e_phase == PHASE_ERROR) { // wenn LED18 leuchtet, ist ein Fehler passiert
+			setLED(LED_D18);
+		}	
+		
 		if (taste_S6 == 1) { // wenn Taste S6 gedrückt wird, geht LED D18 aus
 			resetLED(LED_D18);
 		}
+		
 		if (taste_S7 == 1) { // wenn Taste S7 gedrückt wird, wird der Zählerstand zurückgesetzt			
 			resetLED(LED_D19);
 			resetLED(LED_D20);
-			Init_Output();
 			setAnzahlSchritte(0);
+			Init_Output();
 		}
 		
 	
-		// Aktualisierung Zustand
+		//--------------------------------------Zustand aktualisieren---------------------------------------------
+		
 		alterZustand = zustand;
   }
 }
