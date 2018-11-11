@@ -23,6 +23,6 @@
 ".\objects\drehgeber.o"
 ".\objects\newtimer.o"
 --strict --scatter ".\Objects\Drehgeber.sct"
---summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list ".\Listings\Drehgeber.map" -o .\Objects\Drehgeber.axf

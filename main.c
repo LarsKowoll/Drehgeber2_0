@@ -11,7 +11,6 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include <stdio.h>
-
 #include "TI_Lib.h"
 #include "tft.h"
 
@@ -19,7 +18,6 @@
 //Include instead of "stm32f4xx.h" for
 //compatibility between Simulation and Board
 #include "TI_memory_map.h"
-
 #include "gpio.h"
 
 //--- For Touch Keypad ----------------------
@@ -53,13 +51,11 @@ int main(void) {
 	e = readDrehgeber(&zustand);
 	e = readDrehgeber(&alterZustand);
 	
-	int alterZustand = zustand;
 	int drehung = NO_CHANGE;
 	int taste_S6 = 0;
 	int taste_S7 = 0;
-	
-	
 	int e_phase = 0;
+	
 	gespeicherteZeitAkt();
 	
 	while (1) { // super loop

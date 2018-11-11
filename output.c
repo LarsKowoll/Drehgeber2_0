@@ -9,7 +9,6 @@
 #define maxIntegerLaenge 20
 #define INT_TO_STRING_LENGTH 20
 #define OUT_STRING_LENGTH 100
-#define Y_DIR 2
 #define Y_Schritte 5
 #define Y_GeschWinkel 7
 #define Y_Winkel 6
@@ -17,29 +16,28 @@
 
 
 
-char binary[8];
-int alterZaehlerstand;
-
 //---------------- VALUE -----------------
 // static int stagedStepCounter = 0;
 static int stagedSpeed = 0;
 //-------------------------------------------
 
-static int SchritteHatNeuenWert = 1 ;
-static int WinkelHatNeuenWert = 1 ;
+int SchritteHatNeuenWert = 1 ;
+int WinkelHatNeuenWert = 1 ;
+char binary[8];
+int alterZaehlerstand;
 //--------------- STRINGS + INDEX ----------
 
-static char schritteString[INT_TO_STRING_LENGTH];
-static int schritteIndex = 0;
-static int schritteLastIndex = 0;
+char schritteString[INT_TO_STRING_LENGTH];
+int schritteIndex = 0;
+int schritteLastIndex = 0;
 
-static char geschwWinkelString[INT_TO_STRING_LENGTH];
-static int geschwWinkelIndex = 0;
-static int geschwWinkelLastIndex = 0;
+char geschwWinkelString[INT_TO_STRING_LENGTH];
+int geschwWinkelIndex = 0;
+int geschwWinkelLastIndex = 0;
 
-static char winkelString[INT_TO_STRING_LENGTH];
-static int winkelIndex = 0;
-static int winkelLastIndex =0;
+char winkelString[INT_TO_STRING_LENGTH];
+int winkelIndex = 0;
+int winkelLastIndex =0;
 
 typedef enum {schritte, geschwWinkel, winkel} Status; 
 
@@ -79,15 +77,8 @@ void Init_Output(void) {
 }
 
 
-/**
-*********************************************************************
-* @brief Ldt die Letzte gemessene Geschwindikeit in den Zwischenspeicher
-*
-* @param int letzte gemessene Geschwindigkeit
-*
-* @return void
-********************************************************************/
-void aktualsiereWerte(int schritteProSekunde){	//Schritte pro S
+
+void aktualsiereWerte(int schritteProSekunde){
 	SchritteHatNeuenWert = 1;
 	WinkelHatNeuenWert = 1;
 	stagedSpeed = schritteProSekunde;
@@ -178,7 +169,7 @@ void aktualisiereTFTAusgabe(void){
 		case geschwWinkel: 		//-------------- WINKEL GESCHWINDIGKEIT ANZEIGE -----------------------
 			if(geschwWinkelString[geschwWinkelIndex] == '\0' && (geschwWinkelIndex >= geschwWinkelLastIndex)){
 				if(WinkelHatNeuenWert){
-				int winkelGeschwin = ((stagedSpeed * 360)) / (PULSES_PER_ROTATION);	//Umrechnung der Schritte pro Sekunde in Grad pro sekunde			<--------- TODO Rechnung checken
+				int winkelGeschwin = ((stagedSpeed * 360)) / (PULSES_PER_ROTATION);	//Umrechnung der Schritte pro Sekunde in Grad pro sekunde
 				
 				// Ergebnis Runden				
 				int geschw = winkelGeschwin+((winkelGeschwin % 100)+50);
@@ -249,7 +240,6 @@ void aktualisiereTFTAusgabe(void){
 *
 * @return void
 ********************************************************************/
-
 
 void intToString(int input, char* intAsString){
 		int restInput = 0;	
