@@ -1,10 +1,8 @@
-
 #include "general.h"
 #include "newTimer.h"
 #include "output.h"
 
-
-
+//Variablen
 static int anzahlSchritte = 0;
 static int winkelInDezGrad = 0;
 static int winkel = 0;

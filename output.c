@@ -21,23 +21,22 @@
 static int stagedSpeed = 0;
 //-------------------------------------------
 
-int SchritteHatNeuenWert = 1 ;
-int WinkelHatNeuenWert = 1 ;
-char binary[8];
-int alterZaehlerstand;
+static int SchritteHatNeuenWert = 1 ;
+static int WinkelHatNeuenWert = 1 ;
+static char binary[8];
 //--------------- STRINGS + INDEX ----------
 
-char schritteString[INT_TO_STRING_LENGTH];
-int schritteIndex = 0;
-int schritteLastIndex = 0;
+static char schritteString[INT_TO_STRING_LENGTH];
+static int schritteIndex = 0;
+static int schritteLastIndex = 0;
 
-char geschwWinkelString[INT_TO_STRING_LENGTH];
-int geschwWinkelIndex = 0;
-int geschwWinkelLastIndex = 0;
+static char geschwWinkelString[INT_TO_STRING_LENGTH];
+static int geschwWinkelIndex = 0;
+static int geschwWinkelLastIndex = 0;
 
-char winkelString[INT_TO_STRING_LENGTH];
-int winkelIndex = 0;
-int winkelLastIndex =0;
+static char winkelString[INT_TO_STRING_LENGTH];
+static int winkelIndex = 0;
+static int winkelLastIndex =0;
 
 typedef enum {schritte, geschwWinkel, winkel} Status; 
 
@@ -97,6 +96,11 @@ void resetLED(int led) {
 
 void intToBinary(int zahl) {
 	int rest;
+	if (zahl < 0){
+		int maske = 0xFF;
+		zahl = zahl & maske;
+	}
+	
 	for (int i = 0; i < 8; i++) {
 		rest = zahl % 2;
 		binary[i] = '0' + rest;
@@ -125,10 +129,7 @@ int drehungToLED(int drehung) {
 * @return int
 ********************************************************************/
 int zaehlerstandToLED(int zaehlerstand) {	
-	if (zaehlerstand < 0)
-	{
-		zaehlerstand = zaehlerstand * -1; //Falls der Zaehlerstand im negativen Bereich ist
-	}
+	
 	intToBinary(zaehlerstand);
 	int led = 8;
 	for (int i = 0; i < 8; i++) {
