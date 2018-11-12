@@ -43,6 +43,7 @@ typedef enum {schritte, geschwWinkel, winkel} Status;
 
 static Status currentStatus = schritte;	
 
+static void intToString(int input, char* intAsString);
 
 /**
 *********************************************************************
@@ -54,6 +55,7 @@ static Status currentStatus = schritte;
 ********************************************************************/
 void Init_Output(void) {
 	TFT_cls();
+	TFT_cursor_off();
 	
 	TFT_gotoxy(7, 5);
 	TFT_puts("Schritte: ");
@@ -168,14 +170,9 @@ void aktualisiereTFTAusgabe(void){
 			
 		case geschwWinkel: 		//-------------- WINKEL GESCHWINDIGKEIT ANZEIGE -----------------------
 			if(geschwWinkelString[geschwWinkelIndex] == '\0' && (geschwWinkelIndex >= geschwWinkelLastIndex)){
-				if(WinkelHatNeuenWert){
-				int winkelGeschwin = ((stagedSpeed * 360)) / (PULSES_PER_ROTATION);	//Umrechnung der Schritte pro Sekunde in Grad pro sekunde
+				if(WinkelHatNeuenWert){	
 				
-				// Ergebnis Runden				
-				int geschw = winkelGeschwin+((winkelGeschwin % 100)+50);
-				int geschwGerundet = (geschw / 100);				
-				
-				intToString(geschwGerundet, geschwWinkelString);				
+				intToString(stagedSpeed, geschwWinkelString);				
 				
 				geschwWinkelLastIndex = geschwWinkelIndex;
 				geschwWinkelIndex = 0;					
@@ -241,7 +238,7 @@ void aktualisiereTFTAusgabe(void){
 * @return void
 ********************************************************************/
 
-void intToString(int input, char* intAsString){
+static void intToString(int input, char* intAsString){
 		int restInput = 0;	
 		int negativ = 0;
 		

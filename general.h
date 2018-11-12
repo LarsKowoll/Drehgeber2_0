@@ -10,6 +10,7 @@
 #define TASTE_S7			7
 
 #define LED_PORT			GPIOG
+#define LED_D14				1
 #define LED_D18				5
 #define LED_D19				6
 #define LED_D20				7

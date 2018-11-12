@@ -7,7 +7,6 @@ void setLED(int);
 void resetLED(int);
 int drehungToLED(int drehung);
 int zaehlerstandToLED(int zaehlerstand);
-void intToString(int input, char* intAsString);
 void aktualisiereTFTAusgabe(void);
 
 void aktualsiereWerte(int steps_per_s);

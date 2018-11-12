@@ -5,28 +5,30 @@
 #define schrittTeiler 100000000 //Schritte pro Sekunde
 #define messfenster 50
 
-int startZeit = 0;
+uint64_t startZeit = 0;
+uint64_t zeitDif = 0;
 int counter = 0;
 long long timeSum = 0;
+int schrittZaehlerAlt = 0;
 
 void zeitSchritt(int* schritteProSekunde, int schrittZaehler){
-	int aktuelleZeit = getTimeStamp();
-	int zeitDif = 0;
+	uint64_t aktuelleZeit = getTimeStamp();
+
+	
+	
 	counter++;
 	
-	zeitDif = aktuelleZeit - startZeit;
-	startZeit = aktuelleZeit;
 	
 	if (counter > messfenster){
-		timeSum = 0;
-		counter = 1;
+		zeitDif = (aktuelleZeit - startZeit) / CONVERT2US; // Mikrosekunden
+		startZeit = aktuelleZeit;
+		zeitDif = zeitDif / counter;
+		counter = 0;
 	}
 	
-	timeSum = timeSum + zeitDif;
-	int durchSchnitt = timeSum / counter;
+	
+	*schritteProSekunde = 360000 / ((1200 * zeitDif) / 1000);
 
-
-	*schritteProSekunde = (schrittTeiler / (durchSchnitt)) * CONVERT2US;
 }
 
 void gespeicherteZeitAkt(void){

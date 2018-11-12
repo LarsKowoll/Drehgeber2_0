@@ -47,9 +47,8 @@ int main(void) {
 	Init_Output();
 	timerinit();
 	
-	int e = 0;
-	e = readDrehgeber(&zustand);
-	e = readDrehgeber(&alterZustand);
+	zustand = readDrehgeber();
+	alterZustand = readDrehgeber();
 	
 	int drehung = NO_CHANGE;
 	int taste_S6 = 0;
@@ -62,7 +61,7 @@ int main(void) {
 		
 		//-----------------------------------------Einlesen------------------------------------------------
 		
-		e = readDrehgeber(&zustand); // Zustand einlesen
+		zustand = readDrehgeber(); // Zustand einlesen
 		taste_S6 = isPressed(TASTE_S6); // = 1, wenn Taste gedrückt ist
 		taste_S7 = isPressed(TASTE_S7); // = 1, wenn Taste gedrückt ist
 		
@@ -78,8 +77,9 @@ int main(void) {
 		zaehlerstandToLED(getAnzahlSchritte());	
 		
 		//TFT
-		
+		setLED(LED_D14);
 		aktualisiereTFTAusgabe();
+		resetLED(LED_D14);
 		
 		// Tasten
 		
