@@ -86,12 +86,20 @@ void aktualsiereWerte(int schritteProSekunde){
 }
 
 
-void setLED(int led) {
-	setGPIOPin(LED_PORT, led);
+int setLED(int led) {
+	int e = setGPIOPin(LED_PORT, led);
+	if (e != EOK){
+		return INTERNAL_ERR;
+	}
+	return EOK;
 }
 
-void resetLED(int led) {
-	resetGPIOPin(LED_PORT, led);
+int resetLED(int led) {
+	int e = resetGPIOPin(LED_PORT, led);
+	if (e != EOK){
+		return INTERNAL_ERR;
+	}
+	return EOK;
 }
 
 void intToBinary(int zahl) {

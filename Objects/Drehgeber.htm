@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\Drehgeber.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\Drehgeber.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Mon Nov 12 20:18:38 2018
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Mon Nov 19 10:16:25 2018
 <BR><P>
 <H3>Maximum Stack Usage =        120 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -648,7 +648,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[67]"></a>drehungToLED</STRONG> (Thumb, 42 bytes, Stack size 8 bytes, output.o(i.drehungToLED))
-<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = drehungToLED &rArr; setLED
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = drehungToLED &rArr; setLED
 </UL>
 <BR>[Calls]<UL><LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setLED
 <LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetLED
@@ -735,8 +735,8 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetLED
 </UL>
 
-<P><STRONG><a name="[69]"></a>resetLED</STRONG> (Thumb, 14 bytes, Stack size 8 bytes, output.o(i.resetLED))
-<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = resetLED
+<P><STRONG><a name="[69]"></a>resetLED</STRONG> (Thumb, 28 bytes, Stack size 16 bytes, output.o(i.resetLED))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = resetLED
 </UL>
 <BR>[Calls]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetGPIOPin
 </UL>
@@ -753,8 +753,8 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setLED
 </UL>
 
-<P><STRONG><a name="[68]"></a>setLED</STRONG> (Thumb, 14 bytes, Stack size 8 bytes, output.o(i.setLED))
-<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = setLED
+<P><STRONG><a name="[68]"></a>setLED</STRONG> (Thumb, 28 bytes, Stack size 16 bytes, output.o(i.setLED))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = setLED
 </UL>
 <BR>[Calls]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setGPIOPin
 </UL>
@@ -768,7 +768,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[73]"></a>zaehlerstandToLED</STRONG> (Thumb, 48 bytes, Stack size 16 bytes, output.o(i.zaehlerstandToLED))
-<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = zaehlerstandToLED &rArr; setLED
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = zaehlerstandToLED &rArr; setLED
 </UL>
 <BR>[Calls]<UL><LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setLED
 <LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetLED
