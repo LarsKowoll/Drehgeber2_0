@@ -25,7 +25,6 @@
 
 //--- For Timer -----------------------------
 //#include "timer.h"
-//xaxaxa
 #include "general.h"
 #include "input.h"
 #include "output.h"
@@ -33,8 +32,11 @@
 #include "newTimer.h"
 #include "timer.h"
 
-int zustand = 0;
-int alterZustand = 0;
+volatile int zustand = 0;
+volatile int alterZustand = 0;
+int e_phase = 0;
+int drehung = NO_CHANGE;
+
 
 /**
   * @brief  Main program
@@ -46,14 +48,15 @@ int main(void) {
 	Init_TI_Board(); // Initialisation of Port E and G
 	Init_Output();
 	timerinit();
+	initHardwareDecoder();
 	
 	zustand = readDrehgeber();
 	alterZustand = readDrehgeber();
 	
-	int drehung = NO_CHANGE;
+	//int drehung = NO_CHANGE;
 	int taste_S6 = 0;
 	int taste_S7 = 0;
-	int e_phase = 0;
+	//int e_phase = 0;
 	
 	gespeicherteZeitAkt();
 	
@@ -61,13 +64,13 @@ int main(void) {
 		
 		//-----------------------------------------Einlesen------------------------------------------------
 		
-		zustand = readDrehgeber(); // Zustand einlesen
+		//zustand = readDrehgeber(); // Zustand einlesen
 		taste_S6 = isPressed(TASTE_S6); // = 1, wenn Taste gedrückt ist
 		taste_S7 = isPressed(TASTE_S7); // = 1, wenn Taste gedrückt ist
 		
 		//--------------------------------------Ausgabe berechnen-------------------------------------------
 		
-		e_phase = getDrehrichtung(&zustand, &alterZustand, &drehung);
+		//e_phase = getDrehrichtung(&zustand, &alterZustand, &drehung);
 		
 		//-------------------------------------------Ausgabe------------------------------------------------
 		
@@ -101,8 +104,23 @@ int main(void) {
 	
 		//--------------------------------------Zustand aktualisieren---------------------------------------------
 		
-		alterZustand = zustand;
+		//alterZustand = zustand;
   }
 }
+	
+	void EXTI2_IRQHandler(void){		
+	EXTI->PR = (1<<2); // Reset INT2		
+	zustand = readDrehgeber();
+	e_phase = getDrehrichtung(&zustand, &alterZustand, &drehung);
+	alterZustand = zustand;
+}
+
+void EXTI3_IRQHandler(void){
+	EXTI->PR = (1<<3); // Reset INT3
+	readDrehgeber();
+	e_phase = getDrehrichtung(&zustand, &alterZustand, &drehung);
+	alterZustand = zustand;
+}
+
 
 // EOF

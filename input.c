@@ -8,23 +8,33 @@
   * @brief 		Liest Werte des Pins an Kanal A und B des Drehgebers aus und gibt den Zustand zurück
 	*/
 int readDrehgeber(void) {
-	int kanal_a = readGPIOPin(BUTTON_PORT, KANAL_A);
-	int kanal_b = readGPIOPin(BUTTON_PORT, KANAL_B);
+//	int kanal_a = readGPIOPin(BUTTON_PORT, KANAL_A);
+//	int kanal_b = readGPIOPin(BUTTON_PORT, KANAL_B);
+//	
+//	if (!kanal_a && !kanal_b) {
+//		return PHASE_A;
+//	}
+//	else if (kanal_a && !kanal_b) {
+//		return PHASE_B;
+//	}
+//	else if (kanal_a && kanal_b) {
+//		return PHASE_C;
+//	}
+//	else {
+//		return PHASE_D;
+//	}
+	int input = (GPIOF->IDR & 0x0C) >> 2;	
 	
-	if (!kanal_a && !kanal_b) {
-		return PHASE_A;
+	switch(input){
+		case PHASE_A:
+			return PHASE_A;
+		case PHASE_B:
+			return PHASE_B;
+		case PHASE_C:
+			return PHASE_C;
+		case PHASE_D:
+			return PHASE_D;
 	}
-	else if (kanal_a && !kanal_b) {
-		return PHASE_B;
-	}
-	else if (kanal_a && kanal_b) {
-		return PHASE_C;
-	}
-	else {
-		return PHASE_D;
-	}
-	
-	
 }
 
 int isPressed(int button) {
@@ -41,5 +51,8 @@ int readGPIO(int number, int* value) {
 		return INTERNAL_ERR;
 	}
 }
+
+
+
 
 //EOF

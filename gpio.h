@@ -10,5 +10,7 @@ extern int resetGPIOPin(GPIO_TypeDef* GPIOx, int pin);
 
 extern int readGPIOPin(GPIO_TypeDef* GPIOx, int pin);
 
+extern void initHardwareDecoder();
+
 #endif	/* GPIO_H */
 //EOF
