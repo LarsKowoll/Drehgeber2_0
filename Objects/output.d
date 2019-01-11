@@ -3,11 +3,11 @@
 .\objects\output.o: general.h
 .\objects\output.o: input.h
 .\objects\output.o: output.h
+.\objects\output.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\output.o: gpio.h
 .\objects\output.o: TI_BRD_LIB\Library\TI_memory_map.h
 .\objects\output.o: .\TI_BRD_LIB\TI-C_Board\stm32f4xx.h
 .\objects\output.o: C:\Keil_v5\ARM\CMSIS\Include\core_cm4.h
-.\objects\output.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\output.o: C:\Keil_v5\ARM\CMSIS\Include\core_cmInstr.h
 .\objects\output.o: C:\Keil_v5\ARM\CMSIS\Include\core_cmFunc.h
 .\objects\output.o: C:\Keil_v5\ARM\CMSIS\Include\core_cm4_simd.h

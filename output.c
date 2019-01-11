@@ -7,7 +7,7 @@
 #include "drehgeber.h"
 
 #define maxIntegerLaenge 20
-#define INT_TO_STRING_LENGTH 20
+#define INT_TO_STRING_LENGTH 200
 #define OUT_STRING_LENGTH 100
 #define Y_Schritte 5
 #define Y_GeschWinkel 7
@@ -18,7 +18,7 @@
 
 //---------------- VALUE -----------------
 // static int stagedStepCounter = 0;
-static int stagedSpeed = 0;
+static uint64_t stagedSpeed = 0;
 //-------------------------------------------
 
 static int SchritteHatNeuenWert = 1 ;
@@ -61,12 +61,12 @@ void Init_Output(void) {
 	
 	TFT_gotoxy(7, 6);
 	TFT_puts("Winkel: ");
-	TFT_gotoxy(28, 6);
+	TFT_gotoxy(30, 6);
 	TFT_puts("Grad");
 	
 	TFT_gotoxy(7, 7);
 	TFT_puts("Geschwindigkeit: ");
-	TFT_gotoxy(28, 7);
+	TFT_gotoxy(30, 7);
 	TFT_puts("Grad/s");
 	
 	schritteString[1] = '\0';
@@ -79,7 +79,7 @@ void Init_Output(void) {
 
 
 
-void aktualsiereWerte(int schritteProSekunde){
+void aktualsiereWerte(uint64_t  schritteProSekunde){
 	SchritteHatNeuenWert = 1;
 	WinkelHatNeuenWert = 1;
 	stagedSpeed = schritteProSekunde;
@@ -203,7 +203,7 @@ void aktualisiereTFTAusgabe(void){
 		case winkel:		// --------------   WINKEL ANZEIGE ---------------
 			if(winkelString[winkelIndex] == '\0' && (winkelIndex >= winkelLastIndex)){
 				if(WinkelHatNeuenWert){
-				int winkel = berechneWinkel();
+				uint64_t winkel = berechneWinkel();
 			
 				intToString(winkel, winkelString);				
 

@@ -1,11 +1,12 @@
 
 #ifndef DREHGEBER_H
 #define DREHGEBER_H
+#include <stdint.h>
 
 int getDrehrichtung(int*, int*, int*);
-int getAnzahlSchritte(void);
-void setAnzahlSchritte(int);
-int berechneWinkel(void);
+uint64_t getAnzahlSchritte(void);
+void setAnzahlSchritte(uint64_t);
+uint64_t  berechneWinkel(void);
 int berechneWinkelgeschwindigkeit(void);
 
 #endif	/* DREHGEBER_H */

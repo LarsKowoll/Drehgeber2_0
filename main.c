@@ -32,6 +32,7 @@
 #include "newTimer.h"
 #include "timer.h"
 
+static void updateFSM();
 volatile int zustand = 0;
 volatile int alterZustand = 0;
 int e_phase = 0;
@@ -84,6 +85,10 @@ int main(void) {
 		aktualisiereTFTAusgabe();
 		resetLED(LED_D14);
 		
+		if(checkRotation()) {
+			aktualsiereWerte(0);
+		}
+		
 		// Tasten
 		
 		if (e_phase == PHASE_ERROR) { // wenn LED18 leuchtet, ist ein Fehler passiert
@@ -110,17 +115,19 @@ int main(void) {
 	
 	void EXTI2_IRQHandler(void){		
 	EXTI->PR = (1<<2); // Reset INT2		
-	zustand = readDrehgeber();
-	e_phase = getDrehrichtung(&zustand, &alterZustand, &drehung);
-	alterZustand = zustand;
+	updateFSM();
 }
 
 void EXTI3_IRQHandler(void){
 	EXTI->PR = (1<<3); // Reset INT3
-	readDrehgeber();
+	updateFSM();
+	
+}
+
+static void updateFSM(void) {
+	zustand = readDrehgeber();
 	e_phase = getDrehrichtung(&zustand, &alterZustand, &drehung);
 	alterZustand = zustand;
 }
-
 
 // EOF
